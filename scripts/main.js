@@ -43,6 +43,8 @@
 
             this.process();
 
+            this.speed = parseInt($("#speed").val(), 10);
+
             this.timer = setTimeout(function () {
                 if (!self.running) {
                     return;
