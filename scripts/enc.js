@@ -36,7 +36,7 @@ Basic GUI blocking jpeg encoder
 */
 
 function JPEGEncoder(quality) {
-  var self = this;
+    var self = this;
     var fround = Math.round;
     var ffloor = Math.floor;
     var YTable = new Array(64);
@@ -733,38 +733,3 @@ function JPEGEncoder(quality) {
 
 };
 
-// helper function to get the imageData of an existing image on the current page.
-function getImageDataFromImage(idOrElement){
-    var theImg = (typeof(idOrElement)=='string')? document.getElementById(idOrElement):idOrElement;
-    var cvs = document.createElement('canvas');
-    cvs.width = theImg.width;
-    cvs.height = theImg.height;
-    var ctx = cvs.getContext("2d");
-    ctx.drawImage(theImg,0,0);
-
-    return (ctx.getImageData(0, 0, cvs.width, cvs.height));
-}
-/*
-
-function init(qu){
-    var theImg = document.getElementById('testimage');
-    var cvs = document.createElement('canvas');
-    cvs.width = theImg.width;
-    cvs.height = theImg.height;
-
-    //document.body.appendChild(cvs);
-
-    var ctx = cvs.getContext("2d");
-
-    ctx.drawImage(theImg,0,0);
-
-    var theImgData = (ctx.getImageData(0, 0, cvs.width, cvs.height));
-
-
-    var jpegURI = encoder.encode(theImgData,qu);
-
-    var img = document.createElement('img');
-    img.src = jpegURI;
-    document.body.appendChild(img);
-}
-*/

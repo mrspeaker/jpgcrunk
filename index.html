@@ -1,27 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title>JPGCrunk</title>
 </head>
 <body>
-<img id="mrman" src="mrman.png" />
-<script src="enc.js"></script>
-<script>
+    <img id="mrman" src="images/mrman.png" />
+    <script src="vendor/jquery-2.1.0.js"></script>
+    <script src="scripts/rand.js"></script>
+    <script src="scripts/enc.js"></script>
+    <script src="scripts/main.js"></script>
+    <script>
 
-    window.onload = function () {
-        var theImg = getImageDataFromImage("mrman");
-        var cvs = document.createElement('canvas');
-        cvs.width = theImg.width;
-        cvs.height = theImg.height;
+        jpgcrunk.init();
 
-        var enc = new JPEGEncoder();
-        var jpegURI = enc.encode(theImg, 80);
-
-        var img = document.createElement('img');
-        img.src = jpegURI;
-        document.body.appendChild(img);
-
-    };
-</script>
+    </script>
 </body>
 </html>
