@@ -529,6 +529,11 @@ function JPEGEncoder(quality) {
             const I63 = 63;
             const I64 = 64;
             var DU_DCT = fDCTQuant(CDU, fdtbl);
+
+            if (Rand.randFloat() < 0.001) {
+                return DC;
+            }
+
             //ZigZag reorder
             for (var j=0;j<I64;++j) {
                 DU[ZigZag[j]]=DU_DCT[j];
@@ -580,7 +585,7 @@ function JPEGEncoder(quality) {
             }
         }
 
-        this.encode = function(image,quality) // image data object
+        this.encode = function(image, quality) // image data object
         {
             var time_start = new Date().getTime();
 

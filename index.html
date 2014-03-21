@@ -2,9 +2,18 @@
 <html>
 <head>
     <title>JPGCrunk</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
-    <img id="mrman" src="images/mrman.png" />
+    <div id="controls">
+        <label>seed:</label><input id="seed" type="text" value="42"></input>
+        <br/>
+        <button id="run_button">RUN</button>
+    </div>
+    <div id="output">
+        <img id="main_image" src="images/mrman.png" />
+        <div id="output_canvas"></div>
+    </div>
     <script src="vendor/jquery-2.1.0.js"></script>
     <script src="scripts/rand.js"></script>
     <script src="scripts/enc.js"></script>

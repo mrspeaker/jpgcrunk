@@ -1,0 +1,8 @@
+#controls {
+    width: 300px;
+    float: left;
+}
+
+#main_image {
+    display: none;
+}
