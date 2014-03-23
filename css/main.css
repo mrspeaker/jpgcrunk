@@ -1,18 +1,37 @@
 body {
     font-family: helvetica;
     font-size: 9pt;
+    background-color: #252525;
+    color: #F9F7F4;
 }
-#controls {
-    width: 230px;
-    float: left;
-    min-height: 100%;
-    height: 100%;
-    background-color: #efefef;
-    padding: 4px;
-    margin-right: 4px;
-}
-#output {
 
+#sidebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 240px;
+    background-color: #535353;
+    border-right: 1px solid #C347B9;
+}
+
+#controls {
+    margin-top: 10px;
+    padding: 4px;
+}
+
+h1 {
+    margin: 0;
+}
+header {
+    background-color: #444;
+    padding: 3px;
+}
+.byby {
+    color: #C347B9;
+}
+
+#output {
     margin-left: 245px;
     text-align: center;
 }
@@ -28,19 +47,28 @@ label {
 
 input[type=text] {
     width: 80px;
+    background-color: #4A4A4A;
+    border:1px solid #444;
+    color: #999;
 }
 
 #holder {
     margin-right: 3px;
     margin-top: 20px;
     height: 40px;
-    border: 1px dashed #888;
-    background-color: #f7f7f7;
+    border: 1px dashed #999;
+    background-color: #4A4A4A;
     line-height: 3em;
     text-align: center;
     padding: 10px;
-    color: #888;
+    color: #999;
 }
 .hover {
     background-color: #aaa !important;
+}
+
+#png_output {
+    margin-top: 20px;
+    border:1px solid #888;
+    width: 100%;
 }

@@ -142,10 +142,8 @@
             $("#png_output").remove();
             $("<img></img>", {
                 id: "png_output",
-                src: canvas.toDataURL(),
-                width: canvas.width,
-                height: canvas.height
-            }).appendTo("body");
+                src: canvas.toDataURL()
+            }).appendTo("#out_png");
 
         }
 

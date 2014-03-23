@@ -5,17 +5,24 @@
     <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
-    <div id="controls">
-        <label>Seed:</label><input id="seed" type="text" value="42"></input><br/>
-        <label>Quality (0-100):</label><input id="quality" type="text" value="50"></input><br/>
-        <label>Process break (0-1):</label><input id="procBreak" type="text" value="0.001"></input><br/>
-        <label>Random AASF:</label><input id="randAasf" type="checkbox"></input><br/>
-        <label>Speed:</label><input id="speed" type="text" value="1000"></input><br/>
-        <br/>
-        <button id="run_button">RUN</button>
-        <button id="png_button">make png</button>
+    <div id="sidebar">
+        <header>
+            <h1>jpgcrunk</h1>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="byby">by&nbsp;&nbsp;Mr Speaker</span>
+        </header>
+        <div id="controls">
+            <label>Seed:</label><input id="seed" type="text" value="42"></input><br/>
+            <label>Quality (0-100):</label><input id="quality" type="text" value="50"></input><br/>
+            <label>Process break (0-1):</label><input id="procBreak" type="text" value="0.001"></input><br/>
+            <label>Random AASF:</label><input id="randAasf" type="checkbox"></input><br/>
+            <label>Speed:</label><input id="speed" type="text" value="1000"></input><br/>
+            <br/>
+            <button id="run_button">RUN</button>
+            <button id="png_button">make png</button>
 
-        <div id="holder">Drag 'n' drop image here...</div>
+            <div id="holder">Drag 'n' drop image here...</div>
+            <div id="out_png"></div>
+        </div>
     </div>
     <div id="output">
         <img id="main_image" src="images/aphex.jpg" />
