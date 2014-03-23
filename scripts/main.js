@@ -95,10 +95,15 @@
 
         copyToPNG: function () {
 
-            var c = $(this.copyImageToCanvas(this.outputImg).canvas);
+            var canvas = this.copyImageToCanvas(this.outputImg).canvas;
 
             $("#png_output").remove();
-            c.attr("id", "png_output").appendTo("body");
+            $("<img></img>", {
+                id: "png_output",
+                src: canvas.toDataURL(),
+                width: canvas.width,
+                height: canvas.height
+            }).appendTo("body");
 
         }
 
