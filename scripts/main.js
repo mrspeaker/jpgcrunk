@@ -64,8 +64,9 @@
 
         crunkify: function () {
 
-            Rand.seed = parseInt($("#seed").val(), 10);
             var imgData = this.getImageDataFromImage(this.main_image);
+
+            Rand.seed = parseInt($("#seed").val(), 10);
             this.outputImg.src = this.encoder.encode(imgData, 80);
 
         },
