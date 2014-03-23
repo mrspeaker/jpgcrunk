@@ -18,6 +18,13 @@ body {
 #controls {
     margin-top: 10px;
     padding: 4px;
+    padding-bottom: 20px;
+}
+#controls div {
+    margin-bottom: 3px;
+}
+#buttons {
+    margin-top: 15px;
 }
 
 h1 {
@@ -26,15 +33,34 @@ h1 {
 header {
     background-color: #444;
     padding: 3px;
+    height: 35px;
 }
 .byby {
     color: #C347B9;
+}
+#byline {
+    margin-top: 12px;
+}
+
+#h-one {
+    height: 28px;
+    overflow: hidden;
+    color: #fff;
+    margin-left: 0px;
+}
+#h-two {
+    margin-top: -30px;
+    height: 11px;
+    color: #222;
+    overflow: hidden;
 }
 
 #output {
     margin-left: 245px;
     text-align: center;
 }
+
+
 
 #main_image {
     display: none;

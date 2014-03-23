@@ -111,6 +111,10 @@
             Rand.seed = parseInt($("#seed").val(), 10);
             this.outputImg.src = this.encoder.encode(imgData);
 
+            $("#output_canvas").css({
+                marginTop: 30
+            });
+
         },
 
         copyImageToCanvas: function (selectorOrElement) {
