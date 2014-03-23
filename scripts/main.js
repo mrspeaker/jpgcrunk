@@ -1,4 +1,4 @@
-(function (JPEGEncoder, Rand) {
+(function (JPEGEncoder, settings, Rand) {
 
     "use strict";
 
@@ -35,7 +35,13 @@
 
             });
 
-            $("#seed").on("keyup", function () {
+            $("#controls input[type=text]").on("keyup", function () {
+
+                self.crunkify();
+
+            });
+
+            $("#controls input[type=checkbox]").on("change", function () {
 
                 self.crunkify();
 
@@ -66,8 +72,10 @@
 
             var imgData = this.getImageDataFromImage(this.main_image);
 
+            settings.update();
+
             Rand.seed = parseInt($("#seed").val(), 10);
-            this.outputImg.src = this.encoder.encode(imgData, 80);
+            this.outputImg.src = this.encoder.encode(imgData);
 
         },
 
@@ -113,5 +121,6 @@
 
 }(
     window.JPEGEncoder,
+    window.settings,
     window.Rand
 ));

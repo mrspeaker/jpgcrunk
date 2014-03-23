@@ -1,3 +1,7 @@
+body {
+    font-family: helvetica;
+    font-size: 9pt;
+}
 #controls {
     width: 300px;
     float: left;
@@ -6,3 +10,14 @@
 #main_image {
     display: none;
 }
+
+label {
+    display: inline-block;
+    width: 120px;
+}
+
+input[type=text] {
+    width: 80px;
+    margin-right: 20px;
+}
+

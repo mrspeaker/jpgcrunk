@@ -35,13 +35,13 @@ JPEG encoder ported to JavaScript and optimized by Andreas Ritter, www.bytestrom
 Basic GUI blocking jpeg encoder
 */
 
-(function (Rand) {
+(function (Rand, settings) {
 
     "use strict";
 
     var debug = false;
 
-    function JPEGEncoder(quality) {
+    function JPEGEncoder() {
 
         var YTable = new Array(64);
         var UVTable = new Array(64);
@@ -145,7 +145,7 @@ Basic GUI blocking jpeg encoder
                 ];
 
                 for (var i = 0; i < 64; i++) {
-                    var t = Math.floor((YQT[i]*sf+50)/100);
+                    var t = Math.floor((YQT[i] * sf + 50) / 100);
                     if (t < 1) {
                         t = 1;
                     } else if (t > 255) {
@@ -164,7 +164,7 @@ Basic GUI blocking jpeg encoder
                     99, 99, 99, 99, 99, 99, 99, 99
                 ];
                 for (var j = 0; j < 64; j++) {
-                    var u = Math.floor((UVQT[j]*sf+50)/100);
+                    var u = Math.floor((UVQT[j] * sf + 50) / 100);
                     if (u < 1) {
                         u = 1;
                     } else if (u > 255) {
@@ -176,6 +176,10 @@ Basic GUI blocking jpeg encoder
                     1.0, 1.387039845, 1.306562965, 1.175875602,
                     1.0, 0.785694958, 0.541196100, 0.275899379
                 ];
+                if (settings.randAasf) {
+                    aasf = [];
+                    for (var ii = 0; ii < 8; ii++) aasf.push(Rand.randFloat() * 2);
+                }
                 var k = 0;
                 for (var row = 0; row < 8; row++)
                 {
@@ -254,6 +258,7 @@ Basic GUI blocking jpeg encoder
             // IO functions
             function writeBits(bs)
             {
+                if (!bs) return;
                 var value = bs[0];
                 var posval = bs[1]-1;
                 while ( posval >= 0 ) {
@@ -532,7 +537,7 @@ Basic GUI blocking jpeg encoder
                 const I64 = 64;
                 var DU_DCT = fDCTQuant(CDU, fdtbl);
 
-                if (Rand.randFloat() < 0.001) {
+                if (Rand.randFloat() < settings.procBreak) {
                     return DC;
                 }
 
@@ -541,14 +546,16 @@ Basic GUI blocking jpeg encoder
                     DU[ZigZag[j]]=DU_DCT[j];
                 }
                 var Diff = DU[0] - DC; DC = DU[0];
+
                 //Encode DC
                 if (Diff === 0) {
                     writeBits(HTDC[0]); // Diff might be 0
                 } else {
-                    pos = 32767+Diff;
+                    pos = 32767 + Diff;
                     writeBits(HTDC[category[pos]]);
                     writeBits(bitcode[pos]);
                 }
+
                 //Encode ACs
                 var end0pos = 63; // was const... which is crazy
                 for (; (end0pos>0)&&(DU[end0pos]===0); end0pos--) {}
@@ -557,6 +564,7 @@ Basic GUI blocking jpeg encoder
                     writeBits(EOB);
                     return DC;
                 }
+
                 var i = 1;
                 var lng;
                 while ( i <= end0pos ) {
@@ -587,34 +595,31 @@ Basic GUI blocking jpeg encoder
                 }
             }
 
-            this.encode = function(image, quality) // image data object
-            {
+            this.encode = function(image) {
                 var time_start = new Date().getTime();
 
-                if(quality) setQuality(quality);
+                setQuality(settings.quality);
 
                 // Initialize bit writer
                 byteout = [];
-                bytenew=0;
-                bytepos=7;
+                bytenew = 0;
+                bytepos = 7;
 
                 // Add JPEG headers
                 writeWord(0xFFD8); // SOI
                 writeAPP0();
                 writeDQT();
-                writeSOF0(image.width,image.height);
+                writeSOF0(image.width, image.height);
                 writeDHT();
                 writeSOS();
 
-
                 // Encode 8x8 macroblocks
-                var DCY=0;
-                var DCU=0;
-                var DCV=0;
+                var DCY = 0;
+                var DCU = 0;
+                var DCV = 0;
 
-                bytenew=0;
-                bytepos=7;
-
+                bytenew = 0;
+                bytepos = 7;
 
                 this.encode.displayName = "_encode_";
 
@@ -622,7 +627,7 @@ Basic GUI blocking jpeg encoder
                 var width = image.width;
                 var height = image.height;
 
-                var quadWidth = width*4;
+                var quadWidth = width * 4;
 
                 var x, y = 0;
                 var r, g, b;
@@ -630,46 +635,39 @@ Basic GUI blocking jpeg encoder
                 while(y < height){
                     x = 0;
                     while(x < quadWidth){
-                    start = quadWidth * y + x;
-                    p = start;
-                    col = -1;
-                    row = 0;
+                        start = quadWidth * y + x;
+                        p = start;
+                        col = -1;
+                        row = 0;
 
-                    for(pos=0; pos < 64; pos++){
-                        row = pos >> 3;// /8
-                        col = ( pos & 7 ) * 4; // %8
-                        p = start + ( row * quadWidth ) + col;
+                        for(pos=0; pos < 64; pos++){
+                            row = pos >> 3; // /8
+                            col = ( pos & 7 ) * 4; // %8
+                            p = start + ( row * quadWidth ) + col;
 
-                        if(y+row >= height){ // padding bottom
-                            p-= (quadWidth*(y+1+row-height));
+                            if(y+row >= height){ // padding bottom
+                                p-= (quadWidth*(y+1+row-height));
+                            }
+
+                            if(x+col >= quadWidth){ // padding right
+                                p-= ((x+col) - quadWidth + 4);
+                            }
+
+                            r = imageData[ p++ ];
+                            g = imageData[ p++ ];
+                            b = imageData[ p++ ];
+
+                            // use lookup table (slightly faster)
+                            YDU[pos] = ((RGB_YUV_TABLE[r]             + RGB_YUV_TABLE[(g +  256)>>0] + RGB_YUV_TABLE[(b +  512)>>0]) >> 16)-128;
+                            UDU[pos] = ((RGB_YUV_TABLE[(r +  768)>>0] + RGB_YUV_TABLE[(g + 1024)>>0] + RGB_YUV_TABLE[(b + 1280)>>0]) >> 16)-128;
+                            VDU[pos] = ((RGB_YUV_TABLE[(r + 1280)>>0] + RGB_YUV_TABLE[(g + 1536)>>0] + RGB_YUV_TABLE[(b + 1792)>>0]) >> 16)-128;
+
                         }
 
-                        if(x+col >= quadWidth){ // padding right
-                            p-= ((x+col) - quadWidth + 4);
-                        }
-
-                        r = imageData[ p++ ];
-                        g = imageData[ p++ ];
-                        b = imageData[ p++ ];
-
-
-                        /* // calculate YUV values dynamically
-                        YDU[pos]=((( 0.29900)*r+( 0.58700)*g+( 0.11400)*b))-128; //-0x80
-                        UDU[pos]=(((-0.16874)*r+(-0.33126)*g+( 0.50000)*b));
-                        VDU[pos]=((( 0.50000)*r+(-0.41869)*g+(-0.08131)*b));
-                        */
-
-                        // use lookup table (slightly faster)
-                        YDU[pos] = ((RGB_YUV_TABLE[r]             + RGB_YUV_TABLE[(g +  256)>>0] + RGB_YUV_TABLE[(b +  512)>>0]) >> 16)-128;
-                        UDU[pos] = ((RGB_YUV_TABLE[(r +  768)>>0] + RGB_YUV_TABLE[(g + 1024)>>0] + RGB_YUV_TABLE[(b + 1280)>>0]) >> 16)-128;
-                        VDU[pos] = ((RGB_YUV_TABLE[(r + 1280)>>0] + RGB_YUV_TABLE[(g + 1536)>>0] + RGB_YUV_TABLE[(b + 1792)>>0]) >> 16)-128;
-
-                    }
-
-                    DCY = processDU(YDU, fdtbl_Y, DCY, YDC_HT, YAC_HT);
-                    DCU = processDU(UDU, fdtbl_UV, DCU, UVDC_HT, UVAC_HT);
-                    DCV = processDU(VDU, fdtbl_UV, DCV, UVDC_HT, UVAC_HT);
-                    x+=32;
+                        DCY = processDU(YDU, fdtbl_Y, DCY, YDC_HT, YAC_HT);
+                        DCU = processDU(UDU, fdtbl_UV, DCU, UVDC_HT, UVAC_HT);
+                        DCV = processDU(VDU, fdtbl_UV, DCV, UVDC_HT, UVAC_HT);
+                        x += 32;
                     }
                     y+=8;
                 }
@@ -707,15 +705,14 @@ Basic GUI blocking jpeg encoder
                 quality = 100;
             }
 
-            if(currentQuality == quality) return; // don't recalc if unchanged
+            //if(currentQuality == quality) return; // don't recalc if unchanged
 
             var sf = 0;
             if (quality < 50) {
                 sf = Math.floor(5000 / quality);
             } else {
-                sf = Math.floor(200 - quality*2);
+                sf = Math.floor(200 - quality * 2);
             }
-
             initQuantTables(sf);
             currentQuality = quality;
             if (debug) { console.log('Quality set to: '+quality +'%'); }
@@ -732,7 +729,7 @@ Basic GUI blocking jpeg encoder
             initCategoryNumber();
             initRGBYUVTable();
 
-            setQuality(quality || 50);
+            setQuality(50);
 
             duration = new Date().getTime() - time_start;
             if (debug) { console.log('Initialization '+ duration + 'ms'); }
@@ -745,4 +742,7 @@ Basic GUI blocking jpeg encoder
 
     window.JPEGEncoder = JPEGEncoder;
 
-}(window.Rand));
+}(
+    window.Rand,
+    window.settings
+));
