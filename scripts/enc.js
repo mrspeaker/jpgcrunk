@@ -65,7 +65,6 @@ Basic GUI blocking jpeg encoder
         var VDU = new Array(64);
         var clt = new Array(256);
         var RGB_YUV_TABLE = new Array(2048);
-        var currentQuality;
 
         var ZigZag = [
                  0, 1, 5, 6,14,15,27,28,
@@ -545,7 +544,8 @@ Basic GUI blocking jpeg encoder
                 for (var j=0;j<I64;++j) {
                     DU[ZigZag[j]]=DU_DCT[j];
                 }
-                var Diff = DU[0] - DC; DC = DU[0];
+                var Diff = DU[0] - DC;
+                DC = DU[0];
 
                 //Encode DC
                 if (Diff === 0) {
@@ -589,9 +589,8 @@ Basic GUI blocking jpeg encoder
             }
 
             function initCharLookupTable(){
-                var sfcc = String.fromCharCode;
                 for(var i=0; i < 256; i++){ ///// ACHTUNG // 255
-                    clt[i] = sfcc(i);
+                    clt[i] = String.fromCharCode(i);
                 }
             }
 
@@ -621,8 +620,6 @@ Basic GUI blocking jpeg encoder
                 bytenew = 0;
                 bytepos = 7;
 
-                this.encode.displayName = "_encode_";
-
                 var imageData = image.data;
                 var width = image.width;
                 var height = image.height;
@@ -632,16 +629,16 @@ Basic GUI blocking jpeg encoder
                 var x, y = 0;
                 var r, g, b;
                 var start,p, col,row,pos;
-                while(y < height){
+                while(y < height) {
                     x = 0;
-                    while(x < quadWidth){
+                    while(x < quadWidth) {
                         start = quadWidth * y + x;
                         p = start;
                         col = -1;
                         row = 0;
 
                         for(pos=0; pos < 64; pos++){
-                            row = pos >> 3; // /8
+                            row = pos / 8 | 0;
                             col = ( pos & 7 ) * 4; // %8
                             p = start + ( row * quadWidth ) + col;
 
@@ -687,12 +684,11 @@ Basic GUI blocking jpeg encoder
 
                 var jpegDataUri = 'data:image/jpeg;base64,' + btoa(byteout.join(''));
 
-                byteout = [];
+                byteout.length = 0;
 
                 // benchmarking
                 var duration = new Date().getTime() - time_start;
                 if (debug) { console.log('Encoding time: '+ duration + 'ms'); }
-                //
 
                 return jpegDataUri;
         };
@@ -705,8 +701,6 @@ Basic GUI blocking jpeg encoder
                 quality = 100;
             }
 
-            //if(currentQuality == quality) return; // don't recalc if unchanged
-
             var sf = 0;
             if (quality < 50) {
                 sf = Math.floor(5000 / quality);
@@ -714,7 +708,6 @@ Basic GUI blocking jpeg encoder
                 sf = Math.floor(200 - quality * 2);
             }
             initQuantTables(sf);
-            currentQuality = quality;
             if (debug) { console.log('Quality set to: '+quality +'%'); }
         }
 

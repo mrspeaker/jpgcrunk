@@ -47,7 +47,41 @@
 
             });
 
+            this.bindDragDrop();
             this.crunkify();
+        },
+
+        bindDragDrop: function () {
+            if (typeof window.FileReader === 'undefined') {
+                $("#hover").text("no drag n drop available.");
+                return;
+            }
+            var holder = $("#holder")[0];
+            holder.ondragover = function () { this.classList.add("hover"); return false; };
+            holder.ondragleave = function () { this.classList.remove("hover"); return false; };
+            holder.ondrop = function (e) {
+                this.classList.remove("hover");
+                e.preventDefault();
+
+                var file = e.dataTransfer.files[0],
+                    reader = new FileReader();
+
+                //console.log("YTOU!", $(e.dataTransfer.getData('text/html')).filter('img').attr('src'));
+                if (!file) {
+                    alert("couldn't open that file.");
+                    return;
+                }
+
+                reader.onload = function (event) {
+                    $("#main_image").attr("src", event.target.result).load(function () {
+                        jpgcrunk.crunkify();
+                    });
+                };
+
+                reader.readAsDataURL(file);
+
+                return false;
+            };
         },
 
         run: function () {
@@ -70,7 +104,7 @@
 
         crunkify: function () {
 
-            var imgData = this.getImageDataFromImage(this.main_image);
+            var imgData = this.getImageDataFromImage($("#main_image")[0]);
 
             settings.update();
 
