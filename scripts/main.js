@@ -90,6 +90,9 @@
 
             $("#controls #speed").on("change", function () {
 
+                clearTimeout(self.timer);
+                self.run();
+
                 self.crunkify();
 
             });
