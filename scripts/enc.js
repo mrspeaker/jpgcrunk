@@ -536,7 +536,12 @@ Basic GUI blocking jpeg encoder
                 const I64 = 64;
                 var DU_DCT = fDCTQuant(CDU, fdtbl);
 
+                // jpgcrunk: Return early randomly - stuff goes glitchy, yo.
                 if (Rand.randFloat() < settings.procBreak) {
+                    // jpgcrunk: Write some extra bits to make up for the early return.
+                    for (var ii = 0; ii < settings.makeUpBits; ii++){
+                        writeBits(bitcode[ii]);
+                    }
                     return DC;
                 }
 
@@ -573,8 +578,9 @@ Basic GUI blocking jpeg encoder
                     var nrzeroes = i-startpos;
                     if ( nrzeroes >= I16 ) {
                         lng = nrzeroes>>4;
-                        for (var nrmarker=1; nrmarker <= lng; ++nrmarker)
+                        for (var nrmarker=1; nrmarker <= lng; ++nrmarker) {
                             writeBits(M16zeroes);
+                        }
                         nrzeroes = nrzeroes&0xF;
                     }
                     pos = 32767+DU[i];
@@ -585,6 +591,7 @@ Basic GUI blocking jpeg encoder
                 if ( end0pos != I63 ) {
                     writeBits(EOB);
                 }
+
                 return DC;
             }
 

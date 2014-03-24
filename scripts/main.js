@@ -88,6 +88,12 @@
 
             });
 
+            $("#controls #makeUpBits").on("change", function () {
+
+                self.crunkify();
+
+            });
+
             $("#controls #speed").on("change", function () {
 
                 clearTimeout(self.timer);
@@ -207,7 +213,9 @@
             $("#png_output").remove();
             $("<img></img>", {
                 id: "png_output",
-                src: canvas.toDataURL()
+                src: canvas.toDataURL(),
+                name: "lol",
+                title: "lil"
             }).appendTo("#out_png");
 
         }
