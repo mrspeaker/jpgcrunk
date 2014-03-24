@@ -18,19 +18,26 @@
                 <label>Seed:</label><input id="seed" type="text" value="42"></input>
             </div>
             <div>
-                <label>Quality (0-100):</label><input id="quality" type="text" value="50"></input>
+                <label>Quality:</label>
+                <input id="quality" type="range" min="0" max="100" value="50"></input>
             </div>
             <div>
-                <label>Process break (0-1):</label><input id="procBreak" type="text" value="0.001"></input>
+                <label>Process break:</label>
+                <!--input id="procBreak" type="text" value="0.001"></input -->
+                <input id="procBreak" type="range" min="0" max="100" value="50">
             </div>
             <div>
-                <label>Random AASF:</label><input id="randAasf" type="checkbox"></input>
+                <label>Random AASF:</label>
+                <input id="randAasf" type="checkbox"></input>
             </div>
             <div>
-                <label>Speed:</label><input id="speed" type="text" value="1000"></input>
+                <label>Speed:</label>
+                <input id="speed" type="text" value="1000"></input>
             </div>
 
             <div id="buttons">
+                <button id="next_button">Next</button>
+                <button id="prev_button">Prev</button>
                 <button id="run_button">RUN</button>
                 <button id="png_button">make png</button>
             </div>

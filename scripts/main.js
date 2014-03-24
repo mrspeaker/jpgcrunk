@@ -8,6 +8,8 @@
         encoder: null,
         running: false,
 
+        past: [],
+
         init: function () {
             var self = this;
 
@@ -35,11 +37,59 @@
 
             });
 
+            $("#next_button").click(function () {
+
+                $("#seed").val(Rand.rand(0, 100000));
+                self.crunkify();
+
+            });
+
+            $("#prev_button").click(function () {
+
+                if (!self.past.length) {
+                    return;
+                }
+                self.past.pop();
+                $("#seed").val(self.past.pop());
+                self.crunkify();
+
+            });
+
             $("#controls input[type=text]").on("keyup", function () {
 
                 self.crunkify();
 
             });
+
+            function expo(pos, min, max, minv, maxv) {
+
+                var position = parseFloat(pos, 10),
+                    // calculate adjustment factor
+                    scale = (maxv - minv) / (max - min);
+
+                return Math.exp(minv + scale * (position - min));
+
+            }
+
+            $("#controls #quality").on("change", function () {
+
+                $(this).data("exp", expo(this.value, 0, 100, 0, Math.log(100)));
+
+                self.crunkify();
+
+            });
+
+            $("#controls #procBreak").on("change", function () {
+
+                var ex = 1 / expo(100 - this.value, 0, 100, 0, Math.log(10000));
+
+                $(this).data("exp", ex);
+
+                self.crunkify();
+
+            });
+
+            $("#controls input[type=range]").change();
 
             $("#controls input[type=checkbox]").on("change", function () {
 
@@ -109,6 +159,9 @@
             settings.update();
 
             Rand.seed = parseInt($("#seed").val(), 10);
+
+            this.past.push(Rand.seed);
+
             this.outputImg.src = this.encoder.encode(imgData);
 
             $("#output_canvas").css({

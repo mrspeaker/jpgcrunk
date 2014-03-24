@@ -78,6 +78,11 @@ input[type=text] {
     color: #999;
 }
 
+input[type=range] {
+    width: 85px;
+    margin: 0;
+}
+
 #holder {
     margin-right: 3px;
     margin-top: 20px;
