@@ -64,7 +64,6 @@
             function expo(pos, min, max, minv, maxv) {
 
                 var position = parseFloat(pos, 10),
-                    // calculate adjustment factor
                     scale = (maxv - minv) / (max - min);
 
                 return Math.exp(minv + scale * (position - min));
@@ -81,9 +80,15 @@
 
             $("#controls #procBreak").on("change", function () {
 
-                var ex = 1 / expo(100 - this.value, 0, 100, 0, Math.log(10000));
+                var ex = 1 / expo(100 - this.value, 0, 100, Math.log(10), Math.log(10000));
 
                 $(this).data("exp", ex);
+
+                self.crunkify();
+
+            });
+
+            $("#controls #speed").on("change", function () {
 
                 self.crunkify();
 
@@ -139,7 +144,7 @@
             var self = this;
 
             this.crunkify();
-            this.speed = parseInt($("#speed").val(), 10);
+            this.speed = 2000 - parseInt($("#speed").val(), 10);
             this.timer = setTimeout(function () {
 
                 if (!self.running) {
