@@ -182,7 +182,7 @@ Basic GUI blocking jpeg encoder
                     1.0, 1.387039845, 1.306562965, 1.175875602,
                     1.0, 0.785694958, 0.541196100, 0.275899379
                 ];
-                if (settings.aasfDeviation > 0) {
+                if ((settings.started && !settings.ended) && settings.aasfDeviation > 0) {
                     for (var ii = 0; ii < 8; ii++) {
                         aasf[ii] = aasf[ii] + (rand("mash").randFloat() * settings.aasfDeviation) - (settings.aasfDeviation / 2);
                     }
@@ -543,7 +543,7 @@ Basic GUI blocking jpeg encoder
                 var DU_DCT = fDCTQuant(CDU, fdtbl);
 
                 // jpgcrunk: Return early randomly - stuff goes glitchy, yo.
-                if (rand("crunk").randFloat() < settings.procBreak) {
+                if ((settings.started && !settings.ended) && rand("crunk").randFloat() < settings.procBreak) {
                     // jpgcrunk: Write some extra bits to make up for the early return.
                     for (var ii = 0; ii < settings.makeUpBits; ii++){
                         writeBits(bitcode[ii]);
@@ -642,7 +642,24 @@ Basic GUI blocking jpeg encoder
                 var x, y = 0;
                 var r, g, b;
                 var start,p, col,row,pos;
+                var jpgcrunkStart = (settings.startPerc / 100) * height;
+                var jpgcrunkEnd = (settings.stopPerc / 100) * height;
                 while(y < height) {
+
+                    if (!settings.started && y >= jpgcrunkStart) {
+
+                        settings.started = true;
+                        setQuality(settings.quality);
+
+                    }
+
+                    if (!settings.ended && y > jpgcrunkEnd) {
+
+                        settings.ended = true;
+                        setQuality(settings.quality);
+
+                    }
+
                     x = 0;
                     while(x < quadWidth) {
                         start = quadWidth * y + x;

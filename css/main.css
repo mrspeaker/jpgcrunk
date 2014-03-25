@@ -72,8 +72,8 @@ header {
 }
 
 #controls > div {
-    height: 30px;
-    line-height: 15px;
+    height: 24px;
+    line-height: 12px;
 }
 
 #controls label {

@@ -88,7 +88,7 @@
 
             });
 
-            $("#controls #makeUpBits, #controls #aasfDeviation").on("change", function () {
+            $("#makeUpBits, #aasfDeviation, #startPerc, #stopPerc").on("change", function () {
 
                 self.crunkify();
 
