@@ -88,19 +88,12 @@
 
             });
 
-            $("#controls #makeUpBits").on("change", function () {
+            $("#controls #makeUpBits, #controls #aasfDeviation").on("change", function () {
 
                 self.crunkify();
 
             });
 
-            $("#controls #aasfDeviation").on("change", function () {
-
-                console.log(this.value, settings);
-
-                self.crunkify();
-
-            });
 
             $("#controls #speed").on("change", function () {
 
@@ -113,12 +106,6 @@
 
             $("#controls input[type=range]").change();
 
-            $("#controls input[type=checkbox]").on("change", function () {
-
-                self.crunkify();
-
-            });
-
             this.bindDragDrop();
             this.crunkify();
         },
@@ -128,7 +115,7 @@
                 $("#hover").text("no drag n drop available.");
                 return;
             }
-            var holder = $("#holder")[0];
+            var holder = $("#dragn")[0];
             holder.ondragover = function () { this.classList.add("hover"); return false; };
             holder.ondragleave = function () { this.classList.remove("hover"); return false; };
             holder.ondrop = function (e) {

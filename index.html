@@ -47,9 +47,10 @@
                 <button id="png_button">make png</button>
             </div>
 
-            <div id="holder">Drag 'n' drop image here...</div>
-            <div id="out_png"></div>
+
         </div>
+        <div id="dragn">Drag 'n' drop image here</div>
+        <div id="out_png"></div>
     </div>
     <div id="output">
         <img id="main_image" src="images/mrman.png" />
@@ -63,7 +64,11 @@
     <script src="scripts/main.js"></script>
     <script>
 
-        jpgcrunk.init();
+        $(window).load(function () {
+
+            jpgcrunk.init();
+
+        });
 
     </script>
 </body>

@@ -8,9 +8,4 @@ jpgcrunk by Mr Speaker
 * Vertically center main image
 * Add meta data to generated images
 * Take photo
-
-
-
-
-
-
+* Save-as name

@@ -34,8 +34,15 @@ JPEG encoder ported to JavaScript and optimized by Andreas Ritter, www.bytestrom
 
 Basic GUI blocking jpeg encoder
 */
+/*
 
-(function (Rand, settings) {
+    JPEG encoder crunkified (as well as tidied up, somewhat) §by Mr Speaker 2014
+    http://www.mrspeaker.net
+    @mrspeaker
+
+*/
+
+(function (rand, settings) {
 
     "use strict";
 
@@ -177,14 +184,12 @@ Basic GUI blocking jpeg encoder
                 ];
                 if (settings.aasfDeviation > 0) {
                     for (var ii = 0; ii < 8; ii++) {
-                        aasf[ii] = aasf[ii] + (Rand("mash").randFloat() * settings.aasfDeviation) - (settings.aasfDeviation / 2);
+                        aasf[ii] = aasf[ii] + (rand("mash").randFloat() * settings.aasfDeviation) - (settings.aasfDeviation / 2);
                     }
                 }
                 var k = 0;
-                for (var row = 0; row < 8; row++)
-                {
-                    for (var col = 0; col < 8; col++)
-                    {
+                for (var row = 0; row < 8; row++) {
+                    for (var col = 0; col < 8; col++) {
                         fdtbl_Y[k]  = (1.0 / (YTable [ZigZag[k]] * aasf[row] * aasf[col] * 8.0));
                         fdtbl_UV[k] = (1.0 / (UVTable[ZigZag[k]] * aasf[row] * aasf[col] * 8.0));
                         k++;
@@ -192,7 +197,7 @@ Basic GUI blocking jpeg encoder
                 }
             }
 
-            function computeHuffmanTbl(nrcodes, std_table){
+            function computeHuffmanTbl(nrcodes, std_table) {
                 var codevalue = 0,
                     pos_in_table = 0,
                     HT = [],
@@ -538,7 +543,7 @@ Basic GUI blocking jpeg encoder
                 var DU_DCT = fDCTQuant(CDU, fdtbl);
 
                 // jpgcrunk: Return early randomly - stuff goes glitchy, yo.
-                if (Rand("crunk").randFloat() < settings.procBreak) {
+                if (rand("crunk").randFloat() < settings.procBreak) {
                     // jpgcrunk: Write some extra bits to make up for the early return.
                     for (var ii = 0; ii < settings.makeUpBits; ii++){
                         writeBits(bitcode[ii]);

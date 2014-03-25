@@ -11,8 +11,14 @@
         update: function () {
             this.quality = parseFloat($("#quality").data("exp"), 10);
             this.procBreak = parseFloat($("#procBreak").data("exp"), 10);
+            if (this.procBreak < 0.0001) {
+                this.procBreak = 0;
+            }
+            $("#makeUpBits").prop("disabled", this.procBreak === 0);
+
             this.makeUpBits = parseFloat($("#makeUpBits").val(), 10);
             this.aasfDeviation = parseFloat($("#aasfDeviation").val(), 10);
+
         }
     };
 

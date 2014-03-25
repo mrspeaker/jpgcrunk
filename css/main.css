@@ -1,6 +1,8 @@
+* { box-sizing: border-box }
+
 body {
     font-family: helvetica;
-    font-size: 9pt;
+    font-size: 10pt;
     background-color: #252525;
     color: #F9F7F4;
 }
@@ -15,20 +17,9 @@ body {
     border-right: 1px solid #C347B9;
 }
 
-#controls {
-    margin-top: 10px;
-    padding: 4px;
-    padding-bottom: 20px;
-}
-#controls div {
-    margin-bottom: 3px;
-}
-#buttons {
-    margin-top: 15px;
-}
-
 h1 {
     margin: 0;
+    padding: 0;
 }
 h1 a {
     color: #F9F7F4;
@@ -37,7 +28,7 @@ h1 a {
 header {
     background-color: #444;
     padding: 3px;
-    height: 35px;
+    height: 45px;
 }
 .byby {
     color: #C347B9;
@@ -62,51 +53,68 @@ header {
     overflow: hidden;
 }
 
+#controls {
+    margin-top: 10px;
+    padding: 8px 0px 8px 8px;
+}
+
+#buttons {
+    margin-top: 15px;
+}
+
 #output {
     margin-left: 245px;
     text-align: center;
 }
 
-
-
 #main_image {
     display: none;
 }
 
-label {
-    display: inline-block;
-    width: 140px;
+#controls > div {
+    height: 30px;
+    line-height: 15px;
 }
 
-input[type=text] {
+#controls label {
+    display: block;
+    float: left;
+    width: 100px;
+    padding: 0;
+    margin-top: 3px;
+}
+
+input[type="text"] {
     width: 80px;
     background-color: #4A4A4A;
     border: 1px solid #444;
     color: #999;
 }
 
-input[type=range] {
-    width: 85px;
-    margin: 0;
+input[type="range"] {
+    width: 110px;
 }
 
-#holder {
-    margin-right: 3px;
-    margin-top: 20px;
-    height: 40px;
+input[type="range"]:disabled {
+    opacity: 0.2;
+}
+
+#dragn {
+    height: 60px;
     border: 1px dashed #999;
     background-color: #4A4A4A;
     line-height: 3em;
     text-align: center;
     padding: 10px;
     color: #999;
+    margin: 8px;
 }
+
 .hover {
     background-color: #aaa !important;
 }
 
 #png_output {
-    margin-top: 20px;
-    border:1px solid #888;
-    width: 100%;
+    width: 33%;
+    padding: 8px;
 }
