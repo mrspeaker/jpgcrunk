@@ -16,8 +16,8 @@
             this.encoder = new JPEGEncoder();
             this.main_image = $("#main_image")[0];
 
-            Rand.seed = Math.random() * 100000 | 0;
-            $("#seed").val(Rand.seed);
+            Rand("crunk").seed = Math.random() * 100000 | 0;
+            $("#seed").val(Rand("crunk").seed);
 
             this.outputImg = document.createElement('img');
             $("#output_canvas").append(this.outputImg);
@@ -39,7 +39,7 @@
 
             $("#next_button").click(function () {
 
-                $("#seed").val(Rand.rand(0, 100000));
+                $("#seed").val(Rand("crunk").rand(0, 100000));
                 self.crunkify();
 
             });
@@ -159,7 +159,7 @@
                 if (!self.running) {
                     return;
                 }
-                $("#seed").val(Rand.seed);
+                $("#seed").val(Rand("crunk").seed);
                 self.run();
 
             }, this.speed);
@@ -172,9 +172,9 @@
 
             settings.update();
 
-            Rand.seed = parseInt($("#seed").val(), 10);
-
-            this.past.push(Rand.seed);
+            Rand("crunk").seed = parseInt($("#seed").val(), 10);
+            Rand("mash").seed = Rand("crunk").seed;
+            this.past.push(Rand("crunk").seed);
 
             this.outputImg.src = this.encoder.encode(imgData);
 

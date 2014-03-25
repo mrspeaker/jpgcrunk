@@ -177,7 +177,7 @@ Basic GUI blocking jpeg encoder
                 ];
                 if (settings.randAasf) {
                     aasf = [];
-                    for (var ii = 0; ii < 8; ii++) aasf.push(Rand.randFloat() * 2);
+                    for (var ii = 0; ii < 8; ii++) aasf.push(Rand("mash").randFloat() * 2);
                 }
                 var k = 0;
                 for (var row = 0; row < 8; row++)
@@ -297,8 +297,8 @@ Basic GUI blocking jpeg encoder
                 /* Pass 1: process rows. */
                 var dataOff=0;
                 var i;
-                const I8 = 8;
-                const I64 = 64;
+                var I8 = 8;
+                var I64 = 64;
                 for (i=0; i<I8; ++i)
                 {
                     d0 = data[dataOff];
@@ -531,13 +531,13 @@ Basic GUI blocking jpeg encoder
                 var EOB = HTAC[0x00];
                 var M16zeroes = HTAC[0xF0];
                 var pos;
-                const I16 = 16;
-                const I63 = 63;
-                const I64 = 64;
+                var I16 = 16;
+                var I63 = 63;
+                var I64 = 64;
                 var DU_DCT = fDCTQuant(CDU, fdtbl);
 
                 // jpgcrunk: Return early randomly - stuff goes glitchy, yo.
-                if (Rand.randFloat() < settings.procBreak) {
+                if (Rand("crunk").randFloat() < settings.procBreak) {
                     // jpgcrunk: Write some extra bits to make up for the early return.
                     for (var ii = 0; ii < settings.makeUpBits; ii++){
                         writeBits(bitcode[ii]);

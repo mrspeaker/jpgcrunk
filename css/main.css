@@ -42,6 +42,9 @@ header {
 .byby {
     color: #C347B9;
 }
+#byline a {
+    color: #913389;
+}
 #byline {
     margin-top: 12px;
 }
