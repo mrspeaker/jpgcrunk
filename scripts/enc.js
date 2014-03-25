@@ -642,26 +642,31 @@ Basic GUI blocking jpeg encoder
                 var x, y = 0;
                 var r, g, b;
                 var start,p, col,row,pos;
-                var jpgcrunkStart = (settings.startPerc / 100) * height;
-                var jpgcrunkEnd = (settings.stopPerc / 100) * height;
+                var jpgcrunkTotal = height * quadWidth;
+                var jpgcrunkStart = (settings.startPerc / 100) * jpgcrunkTotal;
+                var jpgcrunkEnd = (settings.stopPerc / 100) * jpgcrunkTotal;
+                var jpgcrunkRunningTotal = 0;
+
                 while(y < height) {
 
-                    if (!settings.started && y >= jpgcrunkStart) {
-
-                        settings.started = true;
-                        setQuality(settings.quality);
-
-                    }
-
-                    if (!settings.ended && y > jpgcrunkEnd) {
-
-                        settings.ended = true;
-                        setQuality(settings.quality);
-
-                    }
-
                     x = 0;
+                    jpgcrunkRunningTotal = y * quadWidth;
                     while(x < quadWidth) {
+                        jpgcrunkRunningTotal = jpgcrunkRunningTotal + x;
+                        if (!settings.started && jpgcrunkRunningTotal >= jpgcrunkStart) {
+
+                            settings.started = true;
+                            setQuality(settings.quality);
+
+                        }
+
+                        if (!settings.ended && jpgcrunkRunningTotal > jpgcrunkEnd) {
+
+                            settings.ended = true;
+                            setQuality(settings.quality);
+
+                        }
+
                         start = quadWidth * y + x;
                         p = start;
                         col = -1;
