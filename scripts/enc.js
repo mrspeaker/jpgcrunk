@@ -175,9 +175,10 @@ Basic GUI blocking jpeg encoder
                     1.0, 1.387039845, 1.306562965, 1.175875602,
                     1.0, 0.785694958, 0.541196100, 0.275899379
                 ];
-                if (settings.randAasf) {
-                    aasf = [];
-                    for (var ii = 0; ii < 8; ii++) aasf.push(Rand("mash").randFloat() * 2);
+                if (settings.aasfDeviation > 0) {
+                    for (var ii = 0; ii < 8; ii++) {
+                        aasf[ii] = aasf[ii] + (Rand("mash").randFloat() * settings.aasfDeviation) - (settings.aasfDeviation / 2);
+                    }
                 }
                 var k = 0;
                 for (var row = 0; row < 8; row++)

@@ -94,6 +94,14 @@
 
             });
 
+            $("#controls #aasfDeviation").on("change", function () {
+
+                console.log(this.value, settings);
+
+                self.crunkify();
+
+            });
+
             $("#controls #speed").on("change", function () {
 
                 clearTimeout(self.timer);
