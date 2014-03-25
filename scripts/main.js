@@ -22,6 +22,12 @@
             this.outputImg = document.createElement('img');
             $("#output_canvas").append(this.outputImg);
 
+            $("#rnd").click(function () {
+                Rand("crunk").seed = Math.random() * 100000 | 0;
+                $("#seed").val(Rand("crunk").seed);
+                self.crunkify();
+            });
+
             $("#run_button").click(function () {
 
                 clearTimeout(self.timer);
@@ -205,7 +211,7 @@
 
             var canvas = this.copyImageToCanvas(this.outputImg).canvas;
 
-            $("#png_output").remove();
+            //$("#png_output").remove();
             $("<img></img>", {
                 id: "png_output",
                 src: canvas.toDataURL(),
