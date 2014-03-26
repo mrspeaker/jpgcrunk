@@ -25,6 +25,9 @@
             $("#rnd").click(function () {
                 Rand("crunk").seed = Math.random() * 100000 | 0;
                 $("#seed").val(Rand("crunk").seed);
+
+                settings.rand();
+
                 self.crunkify();
             });
 
@@ -67,50 +70,20 @@
 
             });
 
-            function expo(pos, min, max, minv, maxv) {
+            $("#controls input[type=range]")
+                .on("change", function () {
 
-                var position = parseFloat(pos, 10),
-                    scale = (maxv - minv) / (max - min);
+                    var id = $(this).attr("id");
 
-                return Math.exp(minv + scale * (position - min));
+                    if (id === "speed") {
+                        clearTimeout(self.timer);
+                        self.run();
+                    }
 
-            }
+                    self.crunkify();
 
-            $("#controls #quality").on("change", function () {
-
-                $(this).data("exp", expo(this.value, 0, 100, 0, Math.log(100)));
-
-                self.crunkify();
-
-            });
-
-            $("#controls #procBreak").on("change", function () {
-
-                var ex = 1 / expo(100 - this.value, 0, 100, Math.log(10), Math.log(10000));
-
-                $(this).data("exp", ex);
-
-                self.crunkify();
-
-            });
-
-            $("#makeUpBits, #aasfDeviation, #startPerc, #stopPerc").on("change", function () {
-
-                self.crunkify();
-
-            });
-
-
-            $("#controls #speed").on("change", function () {
-
-                clearTimeout(self.timer);
-                self.run();
-
-                self.crunkify();
-
-            });
-
-            $("#controls input[type=range]").change();
+                })
+                .change();
 
             this.bindDragDrop();
             this.crunkify();
@@ -121,32 +94,32 @@
                 $("#hover").text("no drag n drop available.");
                 return;
             }
-            var holder = $("#dragn")[0];
-            holder.ondragover = function () { this.classList.add("hover"); return false; };
-            holder.ondragleave = function () { this.classList.remove("hover"); return false; };
-            holder.ondrop = function (e) {
-                this.classList.remove("hover");
-                e.preventDefault();
+            $("#dragn")
+                .on("dragover", function () { $(this).addClass("hover"); return false; })
+                .on("dragleave", function () { $(this).removeClass("hover"); return false; })
+                .on("drop", function (e) {
 
-                var file = e.dataTransfer.files[0],
-                    reader = new FileReader();
+                    e.preventDefault();
+                    $(this).removeClass("hover");
 
-                //console.log("YTOU!", $(e.dataTransfer.getData('text/html')).filter('img').attr('src'));
-                if (!file) {
-                    alert("couldn't open that file.");
-                    return;
-                }
+                    var file = e.originalEvent.dataTransfer.files[0],
+                        reader = new FileReader();
 
-                reader.onload = function (event) {
-                    $("#main_image").attr("src", event.target.result).load(function () {
-                        jpgcrunk.crunkify();
-                    });
-                };
+                    //console.log($(e.dataTransfer.getData('text/html')).filter('img').attr('src'));
+                    if (!file) {
+                        alert("couldn't open that file.");
+                        return;
+                    }
 
-                reader.readAsDataURL(file);
+                    reader.onload = function (event) {
+                        $("#main_image").attr("src", event.target.result).load(function () {
+                            jpgcrunk.crunkify();
+                        });
+                    };
 
-                return false;
-            };
+                    reader.readAsDataURL(file);
+
+                });
         },
 
         run: function () {
@@ -185,15 +158,15 @@
 
         },
 
-        copyImageToCanvas: function (selectorOrElement) {
+        copyImageToCanvas: function (selectorOrElement, foo, fee) {
 
-            var img = typeof selectorOrElement === "string" ? document.querySelector(selectorOrElement) : selectorOrElement,
-                canvas = document.createElement("canvas"),
-                ctx = canvas.getContext("2d");
+            var img = $(selectorOrElement),
+                canvas = $("<canvas></canvas>"),
+                ctx = canvas.get(0).getContext("2d");
 
-            canvas.width = img.width;
-            canvas.height = img.height;
-            ctx.drawImage(img, 0, 0);
+            canvas.prop("width", foo || img.width());
+            canvas.prop("height", fee || img.height());
+            ctx.drawImage(img.get(0), 0, 0);
 
             return ctx;
 
@@ -209,14 +182,12 @@
 
         copyToPNG: function () {
 
-            var canvas = this.copyImageToCanvas(this.outputImg).canvas;
+            var canvas = this.copyImageToCanvas(this.outputImg, $("#main_image").width(), $("#main_image").height()).canvas;
 
-            //$("#png_output").remove();
             $("<img></img>", {
                 id: "png_output",
                 src: canvas.toDataURL(),
-                name: "lol",
-                title: "lil"
+                title: "save me"
             }).appendTo("#out_png");
 
         }

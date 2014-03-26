@@ -85,7 +85,7 @@ header {
 }
 
 input[type="text"] {
-    width: 80px;
+    width: 72px;
     background-color: #4A4A4A;
     border: 1px solid #444;
     color: #999;
@@ -117,4 +117,9 @@ input[type="range"]:disabled {
 #png_output {
     width: 33%;
     padding: 8px;
+}
+
+#output_canvas img {
+    max-width: 90%;
+    max-height: 90%;
 }
