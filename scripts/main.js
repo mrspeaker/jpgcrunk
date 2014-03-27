@@ -158,14 +158,14 @@
 
         },
 
-        copyImageToCanvas: function (selectorOrElement, foo, fee) {
+        copyImageToCanvas: function (selectorOrElement, w, h) {
 
             var img = $(selectorOrElement),
                 canvas = $("<canvas></canvas>"),
                 ctx = canvas.get(0).getContext("2d");
 
-            canvas.prop("width", foo || img.width());
-            canvas.prop("height", fee || img.height());
+            canvas.prop("width", w || img.width());
+            canvas.prop("height", h || img.height());
             ctx.drawImage(img.get(0), 0, 0);
 
             return ctx;
