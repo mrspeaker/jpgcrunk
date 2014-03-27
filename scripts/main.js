@@ -182,13 +182,22 @@
 
         copyToPNG: function () {
 
-            var canvas = this.copyImageToCanvas(this.outputImg, $("#main_image").width(), $("#main_image").height()).canvas;
+            var canvas = this.copyImageToCanvas(
+                    this.outputImg,
+                    $("#main_image").width(),
+                    $("#main_image").height()
+                )
+                .canvas;
+
+            var lnk = $("<a></a>", {
+                href: canvas.toDataURL(),
+                download: "jpgcrunk.png",
+            }).appendTo("#out_png");
 
             $("<img></img>", {
                 id: "png_output",
-                src: canvas.toDataURL(),
-                title: "save me"
-            }).appendTo("#out_png");
+                src: canvas.toDataURL()
+            }).appendTo(lnk);
 
         }
 
