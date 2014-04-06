@@ -29,14 +29,16 @@
   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
+
 /*
 JPEG encoder ported to JavaScript and optimized by Andreas Ritter, www.bytestrom.eu, 11/2009
 
 Basic GUI blocking jpeg encoder
 */
+
 /*
 
-    JPEG encoder crunkified (as well as tidied up, somewhat) §by Mr Speaker 2014
+    JPEG encoder crunkified (as well as tidied up, somewhat) by Mr Speaker 2014
     http://www.mrspeaker.net
     @mrspeaker
 
@@ -544,7 +546,7 @@ Basic GUI blocking jpeg encoder
 
                 // jpgcrunk: Return early randomly - stuff goes glitchy, yo.
                 if ((settings.started && !settings.ended) && rand("crunk").randFloat() < settings.procBreak) {
-                    // jpgcrunk: Write some extra bits to make up for the early return.
+                    // jpgcrunk: Ajust "skew". Write some extra bits to make up for the early return.
                     for (var ii = 0; ii < settings.makeUpBits; ii++){
                         writeBits(bitcode[ii]);
                     }

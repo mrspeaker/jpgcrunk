@@ -11,6 +11,9 @@
         past: [],
 
         init: function () {
+
+            cam.init();
+            
             var self = this;
 
             this.encoder = new JPEGEncoder();
@@ -22,65 +25,66 @@
             this.outputImg = document.createElement('img');
             $("#output_canvas").append(this.outputImg);
 
-            $("#rnd").click(function () {
+            $("#rnd").click(() => {
+
                 Rand("crunk").seed = Math.random() * 100000 | 0;
                 $("#seed").val(Rand("crunk").seed);
 
                 settings.rand();
 
-                self.crunkify();
+                this.crunkify();
             });
 
-            $("#run_button").click(function () {
+            $("#run_button").click(() => {
 
-                clearTimeout(self.timer);
-                self.running = !self.running;
-                self.run();
-                $(this).text(self.running ? "STOP" : "RUN");
-
-            });
-
-            $("#png_button").click(function () {
-
-                self.copyToPNG();
+                clearTimeout(this.timer);
+                this.running = !this.running;
+                this.run();
+                $(this).text(this.running ? "STOP" : "RUN");
 
             });
 
-            $("#next_button").click(function () {
+            $("#png_button").click(() => {
+
+                this.copyToPNG();
+
+            });
+
+            $("#next_button").click(() => {
 
                 $("#seed").val(Rand("crunk").rand(0, 100000));
-                self.crunkify();
+                this.crunkify();
 
             });
 
-            $("#prev_button").click(function () {
+            $("#prev_button").click(() => {
 
-                if (!self.past.length) {
+                if (!this.past.length) {
                     return;
                 }
-                self.past.pop();
-                $("#seed").val(self.past.pop());
-                self.crunkify();
+                this.past.pop();
+                $("#seed").val(this.past.pop());
+                this.crunkify();
 
             });
 
-            $("#controls input[type=text]").on("keyup", function () {
+            $("#controls input[type=text]").on("keyup", () => {
 
-                self.crunkify();
+                this.crunkify();
 
             });
 
             $("#controls input[type=range]")
-                .on("change", function () {
+                .on("change", () => {
 
                     var id = $(this).attr("id");
 
                     if (id === "speed") {
-                        clearTimeout(self.timer);
-                        self.run();
+                        clearTimeout(this.timer);
+                        this.run();
                     }
 
-                    self.crunkify();
+                    this.crunkify();
 
                 })
                 .change();
@@ -88,7 +92,7 @@
             this.bindDragDrop();
             this.crunkify();
 
-            this.capture();
+            // cam.capture();
         },
 
         bindDragDrop: function () {
@@ -126,17 +130,15 @@
 
         run: function () {
 
-            var self = this;
-
             this.crunkify();
             this.speed = 2000 - parseInt($("#speed").val(), 10);
-            this.timer = setTimeout(function () {
+            this.timer = setTimeout(() => {
 
-                if (!self.running) {
+                if (!this.running) {
                     return;
                 }
                 $("#seed").val(Rand("crunk").seed);
-                self.run();
+                this.run();
 
             }, this.speed);
 
@@ -201,55 +203,6 @@
                 src: canvas.toDataURL()
             }).appendTo(lnk);
 
-        },
-
-        capture: function () {
-            var video = document.querySelector("#videoElement");
-
-            // check for getUserMedia support
-            navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
-
-            if (navigator.getUserMedia) {
-                // get webcam feed if available
-                navigator.getUserMedia({video: true}, handleVideo, videoError);
-            }
-
-            function handleVideo(stream) {
-                // if found attach feed to video element
-                video.src = window.URL.createObjectURL(stream);
-            }
-
-            function videoError(e) {
-                // no webcam found - do something
-            }
-            var v,canvas,context,w,h;
-            var imgtag = document.getElementById('imgtag'); // get reference to img tag
-
-            //document.addEventListener('DOMContentLoaded', function(){
-                // when DOM loaded, get canvas 2D context and store width and height of element
-                v = document.getElementById('videoElement');
-                canvas = document.getElementById('canvas');
-                context = canvas.getContext('2d');
-                w = canvas.width;
-                h = canvas.height;
-
-            //},false);
-
-            function draw(v,c,w,h) {
-
-                if(v.paused || v.ended) return false;
-                context.drawImage(v,0,0,w,h);
-
-                var uri = canvas.toDataURL("image/png");
-                imgtag.src = uri;
-            }
-
-            document.getElementById('save').addEventListener('click',function(e){
-
-                draw(v,context,w,h); // when save button is clicked, draw video feed to canvas
-
-            });
-
         }
 
     };
@@ -261,3 +214,4 @@
     window.settings,
     window.Rand
 ));
+

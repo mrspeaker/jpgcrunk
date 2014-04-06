@@ -56,21 +56,16 @@
                 <button id="png_button">make png</button>
             </div>
 
-            <!-- For devices that support getUserMedia and have a webcam we can display the feed in a video element -->
-            <div id="container">
-                <video autoplay id="videoElement" style="width: 150px">
+            <div id="cam">
+                <div id="container">
+                    <video autoplay id="videoElement" style="width: 150px">
 
-                </video>
+                    </video>
+                </div>
+                <canvas id="canvas" width="150"></canvas>
+                <img id="imgtag" src="" width="150" alt="capture" />
+                <input type="button" value="Save" id="save" />
             </div>
-
-            <!-- Selected image will be draw to a canvas -->
-            <canvas id="canvas" width="150"></canvas>
-
-            <!-- Used to capture frame from webcam video feed -->
-            <input type="button" value="Save" id="save" />
-
-            <!-- Or alternatively added to an img tag -->
-            <img id="imgtag" src="" width="150" alt="capture" />
 
         </div>
         <div id="dragn">Drag 'n' drop image here</div>
@@ -84,6 +79,7 @@
     <script src="vendor/jquery-2.1.0.js"></script>
     <script src="scripts/settings.js"></script>
     <script src="scripts/rand.js"></script>
+    <script src="scripts/cam.js"></script>
     <script src="scripts/enc.js"></script>
     <script src="scripts/main.js"></script>
     <script>
