@@ -10,13 +10,13 @@
         this.seed = 42;
     };
 
-    CRand.prototype.rand = function(max, min) {
+    CRand.prototype.rand = function (max, min) {
 
-        return this.randFloat(max, min) | 0;
+        return Math.round(this.randFloat(max, min));
 
     };
 
-    CRand.prototype.randFloat = function(max = 1, min = 0) {
+    CRand.prototype.randFloat = function (max = 1, min = 0) {
 
         this.seed = (this.seed * 9301 + 49297) % 233280;
 
@@ -24,7 +24,7 @@
 
     };
 
-    function Rand (name = "default") {
+    function Rand(name = "default") {
         if (!_rands[name]) {
             _rands[name] = new CRand();
         }

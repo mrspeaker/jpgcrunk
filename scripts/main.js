@@ -13,26 +13,36 @@
         init: function () {
 
             cam.init();
-            
-            var self = this;
 
             this.encoder = new JPEGEncoder();
             this.main_image = $("#main_image")[0];
+            this.setRandSeed();
+
+            this.outputImg = document.createElement("img");
+            $("#output_canvas").append(this.outputImg);
+            this.bindUI();
+            this.bindDragDrop();
+
+            this.crunkify();
+            // cam.capture();
+
+        },
+
+        setRandSeed: function () {
 
             Rand("crunk").seed = Math.random() * 100000 | 0;
             $("#seed").val(Rand("crunk").seed);
 
-            this.outputImg = document.createElement('img');
-            $("#output_canvas").append(this.outputImg);
+        },
+
+        bindUI: function () {
 
             $("#rnd").click(() => {
 
-                Rand("crunk").seed = Math.random() * 100000 | 0;
-                $("#seed").val(Rand("crunk").seed);
-
+                this.setRandSeed();
                 settings.rand();
-
                 this.crunkify();
+
             });
 
             $("#run_button").click(() => {
@@ -44,11 +54,7 @@
 
             });
 
-            $("#png_button").click(() => {
-
-                this.copyToPNG();
-
-            });
+            $("#png_button").click(() => this.copyToPNG());
 
             $("#next_button").click(() => {
 
@@ -68,11 +74,7 @@
 
             });
 
-            $("#controls input[type=text]").on("keyup", () => {
-
-                this.crunkify();
-
-            });
+            $("#controls input[type=text]").on("keyup", () => this.crunkify());
 
             $("#controls input[type=range]")
                 .on("change", () => {
@@ -89,17 +91,15 @@
                 })
                 .change();
 
-            this.bindDragDrop();
-            this.crunkify();
-
-            // cam.capture();
         },
 
         bindDragDrop: function () {
+
             if (typeof window.FileReader === 'undefined') {
                 $("#hover").text("no drag n drop available.");
                 return;
             }
+
             $("#dragn")
                 .on("dragover", function () { $(this).addClass("hover"); return false; })
                 .on("dragleave", function () { $(this).removeClass("hover"); return false; })
@@ -117,15 +117,16 @@
                         return;
                     }
 
-                    reader.onload = function (event) {
-                        $("#main_image").attr("src", event.target.result).load(function () {
-                            jpgcrunk.crunkify();
-                        });
+                    reader.onload = (event) => {
+                        $("#main_image")
+                            .attr("src", event.target.result)
+                            .load(() => jpgcrunk.crunkify()
+                        );
                     };
-
                     reader.readAsDataURL(file);
 
                 });
+
         },
 
         run: function () {
