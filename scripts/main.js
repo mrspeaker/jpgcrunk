@@ -10,10 +10,11 @@
 
         past: [],
 
+        initDone: false,
+
         init () {
 
-            cam.init();
-
+            //cam.init();
             this.encoder = new JPEGEncoder();
             this.main_image = $("#main_image")[0];
             this.setRandSeed();
@@ -25,6 +26,8 @@
             this.bindDragDrop();
 
             this.crunkify();
+
+            this.initDone = true;
             // cam.capture();
 
         },
@@ -79,6 +82,8 @@
 
             $("#controls input[type=range]")
                 .on("change", () => {
+
+                    if (!this.initDone) return;
 
                     var id = $(this).attr("id");
 
@@ -168,7 +173,18 @@
 
             canvas.prop("width", w || img.width());
             canvas.prop("height", h || img.height());
-            ctx.drawImage(img.get(0), 0, 0);
+
+            try {
+                ctx.drawImage(img.get(0), 0, 0);
+            } catch (e) {
+                console.log("Couldn't draw:", e.result, e.name, e.message);
+                setTimeout(() => {
+                    // TODO: figure out why I need this hack when loading images!
+                    // Maybe not loaded yet?
+                    // 2147746065 "NS_ERROR_NOT_AVAILABLE"
+                    $("#next_button").click();
+                }, 700);
+            }
 
             return ctx;
 

@@ -29,6 +29,7 @@ Nope... well, it's complicated. The source file doesn't have to be a jpeg, but i
 
 # TODO
 
+* fix bug: pressing prev past generated images
 * Save settings as previews
 * Allow prev with settings (not just seed)
 * Unique filenames (from init image name)
