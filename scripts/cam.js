@@ -4,11 +4,11 @@
 
 	var cam = {
 
-		init: function () {
+		init () {
 
 		},
 
-		capture: function () {
+		capture () {
 			var v = $("#videoElement")[0],
 				ctx = $("#camout")[0].getContext("2d");
 

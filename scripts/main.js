@@ -10,7 +10,7 @@
 
         past: [],
 
-        init: function () {
+        init () {
 
             cam.init();
 
@@ -29,14 +29,14 @@
 
         },
 
-        setRandSeed: function () {
+        setRandSeed () {
 
             rand("crunk").seed = Math.random() * 100000 | 0;
             $("#seed").val(rand("crunk").seed);
 
         },
 
-        bindUI: function () {
+        bindUI () {
 
             $("#rnd").click(() => {
 
@@ -94,7 +94,7 @@
 
         },
 
-        bindDragDrop: function () {
+        bindDragDrop () {
 
             if (typeof window.FileReader === "undefined") {
                 $("#hover").text("no drag n drop available.");
@@ -130,7 +130,7 @@
 
         },
 
-        run: function () {
+        run () {
 
             this.crunkify();
             this.speed = 2000 - parseInt($("#speed").val(), 10);
@@ -146,7 +146,7 @@
 
         },
 
-        crunkify: function () {
+        crunkify () {
 
             var imgData = this.getImageDataFromImage($("#main_image")[0]);
 
@@ -160,7 +160,7 @@
 
         },
 
-        copyImageToCanvas: function (selectorOrElement, w, h) {
+        copyImageToCanvas (selectorOrElement, w, h) {
 
             var img = $(selectorOrElement),
                 canvas = $("<canvas></canvas>"),
@@ -174,7 +174,7 @@
 
         },
 
-        getImageDataFromImage: function (selectorOrElement) {
+        getImageDataFromImage (selectorOrElement) {
 
             var ctx = this.copyImageToCanvas(selectorOrElement);
 
@@ -182,7 +182,7 @@
 
         },
 
-        copyToPNG: function () {
+        copyToPNG () {
 
             var canvas = this.copyImageToCanvas(
                     this.outputImg,
