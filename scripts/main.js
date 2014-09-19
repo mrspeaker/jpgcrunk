@@ -1,4 +1,4 @@
-(function (JPEGEncoder, settings, Rand) {
+(function (JPEGEncoder, settings, rand, cam) {
 
     "use strict";
 
@@ -20,6 +20,7 @@
 
             this.outputImg = document.createElement("img");
             $("#output_canvas").append(this.outputImg);
+
             this.bindUI();
             this.bindDragDrop();
 
@@ -30,8 +31,8 @@
 
         setRandSeed: function () {
 
-            Rand("crunk").seed = Math.random() * 100000 | 0;
-            $("#seed").val(Rand("crunk").seed);
+            rand("crunk").seed = Math.random() * 100000 | 0;
+            $("#seed").val(rand("crunk").seed);
 
         },
 
@@ -45,12 +46,12 @@
 
             });
 
-            $("#run_button").click(() => {
+            $("#run_button").click((e) => {
 
                 clearTimeout(this.timer);
                 this.running = !this.running;
                 this.run();
-                $(this).text(this.running ? "STOP" : "RUN");
+                $(e.target).text(this.running ? "STOP" : "RUN");
 
             });
 
@@ -58,7 +59,7 @@
 
             $("#next_button").click(() => {
 
-                $("#seed").val(Rand("crunk").rand(0, 100000));
+                $("#seed").val(rand("crunk").rand(0, 100000));
                 this.crunkify();
 
             });
@@ -95,7 +96,7 @@
 
         bindDragDrop: function () {
 
-            if (typeof window.FileReader === 'undefined') {
+            if (typeof window.FileReader === "undefined") {
                 $("#hover").text("no drag n drop available.");
                 return;
             }
@@ -113,7 +114,7 @@
 
                     //console.log($(e.dataTransfer.getData('text/html')).filter('img').attr('src'));
                     if (!file) {
-                        alert("couldn't open that file.");
+                        window.alert("couldn't open that file.");
                         return;
                     }
 
@@ -138,7 +139,7 @@
                 if (!this.running) {
                     return;
                 }
-                $("#seed").val(Rand("crunk").seed);
+                $("#seed").val(rand("crunk").seed);
                 this.run();
 
             }, this.speed);
@@ -151,15 +152,11 @@
 
             settings.update();
 
-            Rand("crunk").seed = parseInt($("#seed").val(), 10);
-            Rand("mash").seed = Rand("crunk").seed;
-            this.past.push(Rand("crunk").seed);
+            rand("crunk").seed = parseInt($("#seed").val(), 10);
+            rand("mash").seed = rand("crunk").seed;
+            this.past.push(rand("crunk").seed);
 
             this.outputImg.src = this.encoder.encode(imgData);
-
-            $("#output_canvas").css({
-                marginTop: 30
-            });
 
         },
 
@@ -213,6 +210,7 @@
 }(
     window.JPEGEncoder,
     window.settings,
-    window.Rand
+    window.Rand,
+    window.cam
 ));
 

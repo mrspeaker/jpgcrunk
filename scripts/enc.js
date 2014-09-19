@@ -38,7 +38,7 @@ Basic GUI blocking jpeg encoder
 
 /*
 
-    JPEG encoder crunkified (as well as tidied up, somewhat) by Mr Speaker 2014
+    JPEG encoder crunkified by Mr Speaker 2014
     http://www.mrspeaker.net
     @mrspeaker
 
@@ -570,10 +570,10 @@ Basic GUI blocking jpeg encoder
                 }
 
                 //Encode ACs
-                var end0pos = 63; // was const... which is crazy
-                for (; (end0pos>0)&&(DU[end0pos]===0); end0pos--) {}
+                var end0pos = 63;
+                for (; (end0pos > 0) && (DU[end0pos]===0); end0pos--) {}
                 //end0pos = first element in reverse order !=0
-                if ( end0pos === 0) {
+                if (end0pos === 0) {
                     writeBits(EOB);
                     return DC;
                 }
@@ -719,13 +719,13 @@ Basic GUI blocking jpeg encoder
 
                 writeWord(0xFFD9); //EOI
 
-                var jpegDataUri = 'data:image/jpeg;base64,' + btoa(byteout.join(''));
+                var jpegDataUri = "data:image/jpeg;base64," + btoa(byteout.join(""));
 
                 byteout.length = 0;
 
                 // benchmarking
                 var duration = new Date().getTime() - time_start;
-                if (debug) { console.log('Encoding time: '+ duration + 'ms'); }
+                if (debug) { console.log("Encoding time: " + duration + "ms"); }
 
                 return jpegDataUri;
         };
@@ -745,7 +745,7 @@ Basic GUI blocking jpeg encoder
                 sf = Math.floor(200 - quality * 2);
             }
             initQuantTables(sf);
-            if (debug) { console.log('Quality set to: '+quality +'%'); }
+            if (debug) { console.log("Quality set to: " + quality + "%"); }
         }
 
         function init(){
@@ -762,7 +762,7 @@ Basic GUI blocking jpeg encoder
             setQuality(50);
 
             duration = new Date().getTime() - time_start;
-            if (debug) { console.log('Initialization '+ duration + 'ms'); }
+            if (debug) { console.log("Initialization " + duration + "ms"); }
 
         }
 

@@ -4,7 +4,7 @@ body {
     font-family: helvetica;
     font-size: 10pt;
     background-color: #252525;
-    color: #F9F7F4; 
+    color: #F9F7F4;
 }
 
 #sidebar {
@@ -118,6 +118,9 @@ input[type="range"]:disabled {
     width: 33%;
     padding: 8px;
 }
+#output_canvas {
+    margin-top: 30px;
+}
 
 #output_canvas img {
     max-width: 90%;
@@ -125,5 +128,5 @@ input[type="range"]:disabled {
 }
 
 #cam {
-    
+    display: none;
 }
