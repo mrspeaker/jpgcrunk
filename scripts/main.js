@@ -69,11 +69,12 @@
 
             $("#prev_button").click(() => {
 
-                if (!this.past.length) {
+                if (this.past.length < 2) {
                     return;
                 }
                 this.past.pop();
                 $("#seed").val(this.past.pop());
+                
                 this.crunkify();
 
             });
@@ -107,9 +108,9 @@
             }
 
             $("#dragn")
-                .on("dragover", function () { $(this).addClass("hover"); return false; })
-                .on("dragleave", function () { $(this).removeClass("hover"); return false; })
-                .on("drop", function (e) {
+                .on("dragover", () => { $(this).addClass("hover"); return false; })
+                .on("dragleave", () => { $(this).removeClass("hover"); return false; })
+                .on("drop", (e) => {
 
                     e.preventDefault();
                     $(this).removeClass("hover");
@@ -157,7 +158,7 @@
 
             settings.update();
 
-            rand("crunk").seed = parseInt($("#seed").val(), 10);
+            var seed = rand("crunk").seed = parseInt($("#seed").val(), 10);
             rand("mash").seed = rand("crunk").seed;
             this.past.push(rand("crunk").seed);
 

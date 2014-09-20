@@ -4,24 +4,22 @@ jpgcrunk is a tool for crunking images.
 
 ## How to use
 
-Drag an image into the "drag n drop" area. Mess around with the sliders. The sliders set some properties of the random number generator. Pressing the "next" button will generate crunks with those properties. If you see a crunk you like, but was spamming the "next" button, you can hit "prev" to go back.
+Drag an image into the "drag n drop" area. Mess around with the sliders or press the "rnd" button. When you see something vaguely interesting, try variations with the "next/prev" buttons.
 
-You can also crunk slide-show style with the RUN button.
-
-The "rnd" button will give a random seed value and random slider settings. If you have the same slider values, and seed, you'll always get the same images.
+The sliders set some properties of the random number generator. Pressing the "next" button will generate crunks with those properties. You can also crunk slide-show style with the RUN button.
 
 If you see something you like, either right-click and save it, or hit "make png" to add it to your preview list.
 
 ## Parameters
 
-Quality:
-Crunk:
-Skew:
-Mash:
-Start %:
-End %:
-RUN Speed:
-Seed:
+Quality: The jpg quality.
+Crunk: Crunkiness.
+Skew: Straightens-up (or skews) to account for data lost to the crunk.
+Mash: Distant cousin of Crunk.
+Start %: When to start crunking (leaves start of pic uncrunked)
+End %: When to stop crunking (no more chance of new crunks towards end of pic)
+RUN Speed: slideshow time - becareful with big images, takes a while to process
+Seed: Having the same seed and parameter values will always return the same image.
 
 ## Only jpgs?! 
 
@@ -29,7 +27,6 @@ Nope... well, it's complicated. The source file doesn't have to be a jpeg, but i
 
 # TODO
 
-* fix bug: pressing prev past generated images
 * Save settings as previews
 * Allow prev with settings (not just seed)
 * Unique filenames (from init image name)
@@ -38,3 +35,4 @@ Nope... well, it's complicated. The source file doesn't have to be a jpeg, but i
 * Add meta data to generated images
 * Take photo
 * Allow dragging saved crunked image into uploader
+* Move encoding to webworker
