@@ -1,4 +1,4 @@
-(function (JPEGEncoder, settings, rand, cam) {
+(function (JPEGEncoder, settings, rand) {
 
     "use strict";
 
@@ -10,11 +10,8 @@
 
         past: [],
 
-        initDone: false,
-
         init () {
 
-            //cam.init();
             this.encoder = new JPEGEncoder();
             this.main_image = $("#main_image")[0];
             this.setRandSeed();
@@ -26,9 +23,6 @@
             this.bindDragDrop();
 
             this.crunkify();
-
-            this.initDone = true;
-            // cam.capture();
 
         },
 
@@ -83,8 +77,6 @@
 
             $("#controls input[type=range]")
                 .on("change", () => {
-
-                    if (!this.initDone) return;
 
                     var id = $(this).attr("id");
 
@@ -227,7 +219,6 @@
 }(
     window.JPEGEncoder,
     window.settings,
-    window.Rand,
-    window.cam
+    window.Rand
 ));
 

@@ -27,12 +27,10 @@ Nope... well, it's complicated. The source file doesn't have to be a jpeg, but i
 
 # TODO
 
-* Save settings as previews
-* Allow prev with settings (not just seed)
+* Save settings with previews (so can re-load them)
 * Unique filenames (from init image name)
 * Scrollable preview pane
 * Warnings on big images
 * Add meta data to generated images
-* Take photo
 * Allow dragging saved crunked image into uploader
 * Move encoding to webworker

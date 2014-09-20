@@ -126,7 +126,3 @@ input[type="range"]:disabled {
     max-width: 90%;
     max-height: 90%;
 }
-
-#cam {
-    display: none;
-}
