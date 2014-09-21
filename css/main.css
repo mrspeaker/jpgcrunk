@@ -13,7 +13,7 @@ body {
     left: 0;
     bottom: 0;
     width: 240px;
-    background-color: #535353;
+    background-color: #050505;/*#535353*/;
     border-right: 1px solid #C347B9;
 }
 
@@ -26,7 +26,7 @@ h1 a {
     text-decoration: none;
 }
 header {
-    background-color: #444;
+    /*background-color: #444;*/
     padding: 3px;
     height: 45px;
 }
@@ -51,6 +51,17 @@ header {
     height: 11px;
     color: #222;
     overflow: hidden;
+}
+
+#crunker1 {
+    width: 6px;
+    height: 120px;
+    background-color: blue;
+    position: absolute;
+    left: 239px;
+    top: 0;
+    background-color: #050505;/*#535353*/;
+    border-right: 1px solid #C347B9;
 }
 
 #controls {
@@ -125,4 +136,27 @@ input[type="range"]:disabled {
 #output_canvas img {
     max-width: 90%;
     max-height: 90%;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {}
+input[type="range"]::-webkit-slider-thumb {}
+
+input[type="range"]::-moz-range-thumb {
+  width: 26px;
+  height: 26px;
+  border: none;
+  border-radius: 0px;
+  background-image: url('../images/btnRange1.png');
+}
+
+
+
+
+button {
+    border: 0;
+    background-image: url('../images/btnNext.png');
+    text-indent: -9999em;
+    line-height:3000;
+    width: 50px;
+    height: 20px;
 }

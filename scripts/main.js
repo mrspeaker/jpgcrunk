@@ -78,7 +78,7 @@
             $("#controls input[type=range]")
                 .on("change", () => {
 
-                    var id = $(this).attr("id");
+                    let id = $(this).attr("id");
 
                     if (id === "speed") {
                         clearTimeout(this.timer);
@@ -99,15 +99,17 @@
                 return;
             }
 
-            $("#dragn")
-                .on("dragover", () => { $(this).addClass("hover"); return false; })
-                .on("dragleave", () => { $(this).removeClass("hover"); return false; })
+            var drag = $("#dragn");
+
+            drag
+                .on("dragover", () => { drag.addClass("hover"); return false; })
+                .on("dragleave", () => { drag.removeClass("hover"); return false; })
                 .on("drop", (e) => {
 
                     e.preventDefault();
-                    $(this).removeClass("hover");
+                    drag.removeClass("hover");
 
-                    var file = e.originalEvent.dataTransfer.files[0],
+                    let file = e.originalEvent.dataTransfer.files[0],
                         reader = new FileReader();
 
                     //console.log($(e.dataTransfer.getData('text/html')).filter('img').attr('src'));
@@ -146,11 +148,11 @@
 
         crunkify () {
 
-            var imgData = this.getImageDataFromImage($("#main_image")[0]);
+            let imgData = this.getImageDataFromImage($("#main_image")[0]);
 
             settings.update();
 
-            var seed = rand("crunk").seed = parseInt($("#seed").val(), 10);
+            let seed = rand("crunk").seed = parseInt($("#seed").val(), 10);
             rand("mash").seed = rand("crunk").seed;
             this.past.push(rand("crunk").seed);
 
@@ -160,7 +162,8 @@
 
         copyImageToCanvas (selectorOrElement, w, h) {
 
-            var img = $(selectorOrElement),
+            let img = $(selectorOrElement),
+                rawImg = img.get(0),
                 canvas = $("<canvas></canvas>"),
                 ctx = canvas.get(0).getContext("2d");
 
@@ -168,12 +171,11 @@
             canvas.prop("height", h || img.height());
 
             try {
-                ctx.drawImage(img.get(0), 0, 0);
+                ctx.drawImage(rawImg, 0, 0);
             } catch (e) {
-                console.log("Couldn't draw:", e.result, e.name, e.message);
                 setTimeout(() => {
                     // TODO: figure out why I need this hack when loading images!
-                    // Maybe not loaded yet?
+                    // Maybe not loaded yet? Maybe, but rawImg.complete is true, soo...
                     // 2147746065 "NS_ERROR_NOT_AVAILABLE"
                     $("#next_button").click();
                 }, 700);
@@ -185,7 +187,7 @@
 
         getImageDataFromImage (selectorOrElement) {
 
-            var ctx = this.copyImageToCanvas(selectorOrElement);
+            let ctx = this.copyImageToCanvas(selectorOrElement);
 
             return ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
 
@@ -193,14 +195,14 @@
 
         copyToPNG () {
 
-            var canvas = this.copyImageToCanvas(
+            let canvas = this.copyImageToCanvas(
                     this.outputImg,
                     $("#main_image").width(),
                     $("#main_image").height()
                 )
                 .canvas;
 
-            var lnk = $("<a></a>", {
+            let lnk = $("<a></a>", {
                 href: canvas.toDataURL(),
                 download: "jpgcrunk.png",
             }).appendTo("#out_png");
