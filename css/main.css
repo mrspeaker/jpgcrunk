@@ -27,14 +27,19 @@ h1 a {
 }
 header {
     /*background-color: #444;*/
+    background-image: url(../images/jpgcrunk.png);
     padding: 3px;
-    height: 45px;
+    height: 80px;
 }
 .byby {
     color: #C347B9;
+    font-size: 20pt;
 }
 #byline a {
     color: #913389;
+    position: absolute;
+    top: 49px;
+    left: 28px;
 }
 #byline {
     margin-top: 12px;
@@ -45,12 +50,14 @@ header {
     overflow: hidden;
     color: #fff;
     margin-left: 0px;
+    display:none;
 }
 #h-two {
     margin-top: -30px;
     height: 11px;
     color: #222;
     overflow: hidden;
+    display:none;
 }
 
 #crunker1 {
@@ -140,7 +147,6 @@ input[type="range"]:disabled {
 
 input[type="range"]::-webkit-slider-runnable-track {}
 input[type="range"]::-webkit-slider-thumb {}
-
 input[type="range"]::-moz-range-thumb {
   width: 26px;
   height: 26px;
@@ -154,9 +160,13 @@ input[type="range"]::-moz-range-thumb {
 
 button {
     border: 0;
-    background-image: url('../images/btnNext.png');
     text-indent: -9999em;
-    line-height:3000;
-    width: 50px;
-    height: 20px;
+    width: 52px;
+    height: 25px;
+    background-size: 100%;
 }
+#next_button { background-image: url('../images/btnNext.png'); }
+#prev_button { background-image: url('../images/btnPrev.png'); }
+#run_button { background-image: url('../images/btnRun.png'); }
+#png_button { background-image: url('../images/btnMakePng.png'); }
+#rnd { background-image: url('../images/btnRnd.png'); }
