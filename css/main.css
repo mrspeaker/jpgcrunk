@@ -37,6 +37,8 @@ header {
     color: #C347B9;
     opacity: 0;
     font-size: 20pt;
+    border: 1px solid blue;
+    height: 18px !important;
 }
 #byline a {
     color: #913389;
@@ -106,8 +108,9 @@ header {
     display: block;
     float: left;
     width: 100px;
+    height: 18px;
     padding: 0;
-    margin-top: 3px;
+    margin-top: -2px;
 }
 
 #seed {
@@ -154,9 +157,16 @@ input[type="range"]:disabled {
     max-width: 90%;
     max-height: 90%;
 }
+input[type="range"] {
 
-input[type="range"]::-webkit-slider-runnable-track {}
-input[type="range"]::-webkit-slider-thumb {}
+}
+input[type="range"]::-webkit-slider-runnable-track {
+
+}
+input[type="range"]::-webkit-slider-thumb {
+    background-color: green;
+    color: red;
+}
 input[type="range"]::-moz-range-thumb {
   width: 26px;
   height: 26px;
@@ -192,4 +202,13 @@ button {
     background-image: url('../images/btnRnd.png'); 
     width: 36px;
     height: 18px;
+}
+
+#txtQuality {
+    text-indent: -999em;
+    background: url('../images/txtQuality.png') no-repeat;
+}
+#txtCrunk {
+    text-indent: -999em;
+    background: url('../images/txtCrunk.png') no-repeat;
 }
