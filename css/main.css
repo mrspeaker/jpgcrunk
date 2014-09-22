@@ -16,6 +16,7 @@ body {
     width: 240px;
     background-color: #050505;/*#535353*/;
     border-right: 1px solid #C347B9;
+    background-image: url(../images/bg-side.png);
 }
 
 h1 {
@@ -109,12 +110,13 @@ header {
     margin-top: 3px;
 }
 
-input[type="text"] {
-    width: 72px;
+#seed {
+    width: 62px;
     background-color: transparent;
     border: 0;
     border-bottom: 1px solid #444;
     color: #999;
+    margin-left: 9px;
 }
 
 input[type="range"] {

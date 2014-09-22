@@ -28,6 +28,7 @@ Nope! The source file doesn't have to be a jpeg, but it's *encoded* as a jpeg - 
 # TODO
 
 * Prev work with RND changes (save settings)
+* Stop button.
 * Save settings with previews (so can re-load them)
 * Unique filenames (from init image name)
 * Scrollable preview pane
