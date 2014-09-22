@@ -111,6 +111,7 @@ header {
     height: 18px;
     padding: 0;
     margin-top: -2px;
+    text-indent: -999em;
 }
 
 #seed {
@@ -204,11 +205,11 @@ button {
     height: 18px;
 }
 
-#txtQuality {
-    text-indent: -999em;
-    background: url('../images/txtQuality.png') no-repeat;
-}
-#txtCrunk {
-    text-indent: -999em;
-    background: url('../images/txtCrunk.png') no-repeat;
-}
+#txtQuality { background: url('../images/txtQuality.png') no-repeat; }
+#txtCrunk { background: url('../images/txtCrunk.png') no-repeat; }
+#txtSkew { background: url('../images/txtSkew.png') no-repeat; }
+#txtMash { background: url('../images/txtMash.png') no-repeat; }
+#txtStart { background: url('../images/txtStart.png') no-repeat; }
+#txtEnd { background: url('../images/txtEnd.png') no-repeat; }
+#txtRun { background: url('../images/txtRun.png') no-repeat; }
+#txtSeed { background: url('../images/txtSeed.png') no-repeat; }
