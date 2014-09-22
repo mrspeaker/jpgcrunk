@@ -41,6 +41,7 @@ header {
     position: absolute;
     top: 49px;
     left: 28px;
+    height: 30px;
 }
 #byline {
     margin-top: 12px;
@@ -84,6 +85,10 @@ header {
 #output {
     margin-left: 245px;
     text-align: center;
+}
+
+#output img {
+    box-shadow: 10px 10px 25px #666;
 }
 
 #main_image {
@@ -156,7 +161,6 @@ input[type="range"]::-moz-range-thumb {
   border-radius: 0px;
   background-image: url('../images/btnRange1.png');
 }
-
 
 button {
     border: 0;
