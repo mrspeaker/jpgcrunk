@@ -27,6 +27,8 @@ Nope... well, it's complicated. The source file doesn't have to be a jpeg, but i
 
 # TODO
 
+* Bug: twitter link overlapping slider
+* Prev work with RND changes (save settings)
 * Save settings with previews (so can re-load them)
 * Unique filenames (from init image name)
 * Scrollable preview pane

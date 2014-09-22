@@ -1,7 +1,7 @@
 * { box-sizing: border-box; }
 
 body {
-    font-family: helvetica;
+    font-family: Consolas, monospace;
     font-size: 10pt;
     background-color: #252525;
     color: #F9F7F4;
@@ -33,6 +33,7 @@ header {
 }
 .byby {
     color: #C347B9;
+    opacity: 0;
     font-size: 20pt;
 }
 #byline a {
@@ -104,8 +105,9 @@ header {
 
 input[type="text"] {
     width: 72px;
-    background-color: #4A4A4A;
-    border: 1px solid #444;
+    background-color: transparent;
+    border: 0;
+    border-bottom: 1px solid #444;
     color: #999;
 }
 
@@ -156,17 +158,31 @@ input[type="range"]::-moz-range-thumb {
 }
 
 
-
-
 button {
     border: 0;
-    text-indent: -9999em;
-    width: 52px;
-    height: 25px;
+    text-indent: -999em;
+    width: 43px;
+    height: 20px;
     background-size: 100%;
 }
-#next_button { background-image: url('../images/btnNext.png'); }
-#prev_button { background-image: url('../images/btnPrev.png'); }
-#run_button { background-image: url('../images/btnRun.png'); }
-#png_button { background-image: url('../images/btnMakePng.png'); }
-#rnd { background-image: url('../images/btnRnd.png'); }
+#next_button { 
+    background-image: url('../images/btnNext.png'); 
+    width:43px;
+}
+#prev_button { 
+    background-image: url('../images/btnPrev.png'); 
+    width:40px;
+}
+#run_button { 
+    background-image: url('../images/btnRun.png'); 
+    width:43px;
+}
+#png_button { 
+    background-image: url('../images/btnMakePng.png'); 
+    width: 72px;
+}
+#rnd { 
+    background-image: url('../images/btnRnd.png'); 
+    width: 36px;
+    height: 18px;
+}
