@@ -23,11 +23,10 @@ Seed: Having the same seed and parameter values will always return the same imag
 
 ## Only jpgs?! 
 
-Nope... well, it's complicated. The source file doesn't have to be a jpeg, but it's encoded as a jpeg with lots of jpeg crunkiness. If you right-click and save the image, you'll get a jpeg. If you hit the "make png" button, it will be save into the preview section as a png.
+Nope! The source file doesn't have to be a jpeg, but it's *encoded* as a jpeg - with lots of jpeg crunkiness. If you right-click and save the image, you'll get a jpeg. If you hit the "make png" button, it will be save into the preview section as a png.
 
 # TODO
 
-* Bug: twitter link overlapping slider
 * Prev work with RND changes (save settings)
 * Save settings with previews (so can re-load them)
 * Unique filenames (from init image name)

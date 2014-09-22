@@ -5,6 +5,7 @@ body {
     font-size: 10pt;
     background-color: #252525;
     color: #F9F7F4;
+    background-image: url(../images/bg.png);
 }
 
 #sidebar {
@@ -88,7 +89,7 @@ header {
 }
 
 #output img {
-    box-shadow: 10px 10px 25px #666;
+    box-shadow: 0px 0px 20px #555;
 }
 
 #main_image {
@@ -127,7 +128,7 @@ input[type="range"]:disabled {
 #dragn {
     height: 60px;
     border: 1px dashed #999;
-    background-color: #4A4A4A;
+    background-color: #2a2a2a;
     line-height: 3em;
     text-align: center;
     padding: 10px;
@@ -136,7 +137,7 @@ input[type="range"]:disabled {
 }
 
 .hover {
-    background-color: #aaa !important;
+    background-color: #4a4a4a !important;
 }
 
 #png_output {
