@@ -133,17 +133,19 @@ input[type="range"]:disabled {
 
 #dragn {
     height: 60px;
-    border: 1px dashed #999;
     background-color: #2a2a2a;
     line-height: 3em;
     text-align: center;
     padding: 10px;
     color: #999;
     margin: 8px;
+    background-image: url(../images/drag.png);
+    text-indent: -999em;
 }
 
 .hover {
     background-color: #4a4a4a !important;
+    background-image: url(../images/dragOver.png) !important;
 }
 
 #png_output {
