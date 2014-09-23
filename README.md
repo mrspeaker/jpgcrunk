@@ -2,7 +2,7 @@
 
 [jpgcrunk](http://www.mrspeaker.net/dev/jpgcrunk/) is a tool for crunking images.
 
-![jpgcrunk](http://www.mrspeaker.net/dev/jpgcrunk/images/icohead.png)
+![jpgcrunk](http://www.mrspeaker.net/dev/jpgcrunk/images/jpgcrunka.png)
 
 ## How to use
 
