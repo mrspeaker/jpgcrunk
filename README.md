@@ -14,14 +14,14 @@ If you see something you like, either right-click and save it, or hit "make png"
 
 ## Parameters
 
-Quality: The jpg quality.
-Crunk: Crunkiness.
-Skew: Straightens-up (or skews) to account for data lost to the crunk.
-Mash: Distant cousin of Crunk.
-Start %: When to start crunking (leaves start of pic uncrunked)
-End %: When to stop crunking (no more chance of new crunks towards end of pic)
-RUN Speed: slideshow time - becareful with big images, takes a while to process
-Seed: Having the same seed and parameter values will always return the same image.
+- Quality: The jpg quality.
+- Crunk: Crunkiness.
+- Skew: Straightens-up (or skews) to account for data lost to the crunk.
+- Mash: Distant cousin of Crunk.
+- Start %: When to start crunking (leaves start of pic uncrunked)
+- End %: When to stop crunking (no more chance of new crunks towards end of pic)
+- RUN Speed: slideshow time - becareful with big images, takes a while to process
+- Seed: Having the same seed and parameter values will always return the same image.
 
 ## Only jpgs?! 
 
