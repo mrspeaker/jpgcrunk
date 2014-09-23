@@ -143,6 +143,17 @@ input[type="range"]:disabled {
     text-indent: -999em;
 }
 
+#twit_link {
+    position: absolute;
+    bottom: 5px;
+    left: 10px;
+}
+#git_link {
+    position: absolute;
+    bottom: 5px;
+    left: 45px;
+}
+
 .hover {
     background-color: #4a4a4a !important;
     background-image: url(../images/dragOver.png) !important;
