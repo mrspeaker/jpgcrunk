@@ -1,6 +1,7 @@
 # jpgcrunk by Mr Speaker
 
-[jpgcrunk](http://www.mrspeaker.net/dev/jpgcrunk/) is a tool for crunking images. 
+[jpgcrunk](http://www.mrspeaker.net/dev/jpgcrunk/) is a tool for crunking images.
+
 ![jpgcrunk](http://www.mrspeaker.net/dev/jpgcrunk/images/icohead.png)
 
 ## How to use
