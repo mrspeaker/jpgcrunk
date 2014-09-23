@@ -29,6 +29,11 @@ Nope! The source file doesn't have to be a jpeg, but it's *encoded* as a jpeg - 
 
 ![jpgcrunk](http://www.mrspeaker.net/dev/jpgcrunk/images/icohead.png)
 
+## The Code
+
+**WARNING** I wrote this in ES6 and transpiled to ES5 with Traceur. The final files are linked to the Traceur output: so if you've got Firefox (high five!) then just link to the `scripts` directory in `index.html` (rather than to `build`). Otherwise, you need to transpile the `scripts` directory with `Traceur` (or similar)
+
+
 # TODO
 
 * Prev work with RND changes (save settings)
