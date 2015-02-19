@@ -14,9 +14,9 @@
         started: false,
         ended: false,
 
-        update: function () {
+        update () {
 
-            function expo(pos, min, max, minv, maxv) {
+            function expo (pos, min, max, minv, maxv) {
 
                 var position = parseFloat(pos, 10),
                     scale = (maxv - minv) / (max - min);
@@ -46,7 +46,7 @@
 
         },
 
-        rand: function () {
+        rand () {
 
             $("#quality").val(Math.random() * 100 | 0);
             $("#procBreak").val(Math.random() * 75 | 0);

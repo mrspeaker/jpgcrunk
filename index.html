@@ -75,16 +75,20 @@
     </div>
 
     <script src="vendor/jquery-2.1.0.js"></script>
-    <!--<script src="scripts/settings.js" type="application/javascript;version=1.7"></script>
-    <script src="scripts/rand.js" type="application/javascript;version=1.7"></script>
-    <script src="scripts/enc.js" type="application/javascript;version=1.7"></script>
-    <script src="scripts/main.js" type="application/javascript;version=1.7"></script>
+    <!--
+        Note: I wrote this in ES6, 'cause I use Firefox... but had to
+        transpile it with Traceur, so others less fortunate could also run it.
+    -->
+    <script src="scripts/settings.js?a=1"></script>
+    <script src="scripts/rand.js"></script>
+    <script src="scripts/enc.js"></script>
+    <script src="scripts/main.js"></script>
     <script>
 
         $(window).load(() => jpgcrunk.init());
 
-    </script>-->
-    <script src="scripts/settings.js"></script>
+    </script>
+    <!--<script src="scripts/settings.js"></script>
     <script src="build/rand.js"></script>
     <script src="scripts/enc.js"></script>
     <script src="build/main.js"></script>
@@ -94,16 +98,14 @@
              jpgcrunk.init();
         });
 
-    </script>
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-      ga('create', 'UA-8233321-4', 'auto');
-      ga('send', 'pageview');
+        ga('create', 'UA-8233321-4', 'auto');
+        ga('send', 'pageview');
 
-    </script>
+    </script -->
 </body>
 </html>

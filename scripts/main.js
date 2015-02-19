@@ -2,7 +2,7 @@
 
     "use strict";
 
-    var jpgcrunk = {
+    const jpgcrunk = {
 
         speed: 1000,
         encoder: null,
@@ -68,7 +68,7 @@
                 }
                 this.past.pop();
                 $("#seed").val(this.past.pop());
-                
+
                 this.crunkify();
 
             });
@@ -78,7 +78,7 @@
             $("#controls input[type=range]")
                 .on("change", () => {
 
-                    let id = $(this).attr("id");
+                    const id = $(this).attr("id");
 
                     if (id === "speed") {
                         clearTimeout(this.timer);
@@ -109,8 +109,8 @@
                     e.preventDefault();
                     drag.removeClass("hover");
 
-                    let file = e.originalEvent.dataTransfer.files[0],
-                        reader = new FileReader();
+                    const file = e.originalEvent.dataTransfer.files[0];
+                    const reader = new FileReader();
 
                     //console.log($(e.dataTransfer.getData('text/html')).filter('img').attr('src'));
                     if (!file) {
@@ -118,9 +118,9 @@
                         return;
                     }
 
-                    reader.onload = (event) => {
+                    reader.onload = ev => {
                         $("#main_image")
-                            .attr("src", event.target.result)
+                            .attr("src", e.target.result)
                             .load(() => jpgcrunk.crunkify()
                         );
                     };
@@ -148,11 +148,11 @@
 
         crunkify () {
 
-            let imgData = this.getImageDataFromImage($("#main_image")[0]);
+            const imgData = this.getImageDataFromImage($("#main_image")[0]);
 
             settings.update();
 
-            let seed = rand("crunk").seed = parseInt($("#seed").val(), 10);
+            const seed = rand("crunk").seed = parseInt($("#seed").val(), 10);
             rand("mash").seed = rand("crunk").seed;
             this.past.push(rand("crunk").seed);
 
@@ -162,10 +162,10 @@
 
         copyImageToCanvas (selectorOrElement, w, h) {
 
-            let img = $(selectorOrElement),
-                rawImg = img.get(0),
-                canvas = $("<canvas></canvas>"),
-                ctx = canvas.get(0).getContext("2d");
+            const img = $(selectorOrElement);
+            const rawImg = img.get(0);
+            const canvas = $("<canvas></canvas>");
+            const ctx = canvas.get(0).getContext("2d");
 
             canvas.prop("width", w || img.width());
             canvas.prop("height", h || img.height());
@@ -187,7 +187,7 @@
 
         getImageDataFromImage (selectorOrElement) {
 
-            let ctx = this.copyImageToCanvas(selectorOrElement);
+            const ctx = this.copyImageToCanvas(selectorOrElement);
 
             return ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
 
@@ -195,14 +195,14 @@
 
         copyToPNG () {
 
-            let canvas = this.copyImageToCanvas(
+            const canvas = this.copyImageToCanvas(
                     this.outputImg,
                     $("#main_image").width(),
                     $("#main_image").height()
                 )
                 .canvas;
 
-            let lnk = $("<a></a>", {
+            const lnk = $("<a></a>", {
                 href: canvas.toDataURL(),
                 download: "jpgcrunk.png",
             }).appendTo("#out_png");
